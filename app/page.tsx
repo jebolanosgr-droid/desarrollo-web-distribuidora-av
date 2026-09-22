@@ -21,10 +21,10 @@ const services = [
   ['search.png', 'Asesoría personalizada', 'Encuentra la mejor alternativa para crecer con confianza.', 'servicio-asesoria.jpg'],
 ]
 const trustPoints = [
-  ['https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Escudo%20blanco-ONOgW6TUluan7HT0JunE5QfQOoLbT2.png', 'Calidad garantizada'],
-  ['https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Carro%20blanco-m81WrZJLYDnocXpebhIgcpJB89FGue.png', 'Entrega oportuna'],
-  ['https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Auri%20blanco-UVCtb2ZQ4jaJ5Ng3WqY7hKUrAzZdpk.png', 'Asesoría especializada'],
-  ['https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Estrella%20blanca-RZoiiQN7HSN9vllfMk9q3rlUyUonam.png', 'Clientes satisfechos'],
+  ['https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Escudo%20blanco-Kikm5Ky4Xr8h3VXxCCMZVs0VEK8dIO.png', 'Calidad garantizada'],
+  ['https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Carro%20blanco-WO2strpQIAvDvGvkzEwC308f4kAxvJ.png', 'Entrega Oportuna'],
+  ['https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Auri%20blanco-AnlkAK3f8S8HArQuQm8O8uxGSWLGXI.png', 'Asesoria especializada'],
+  ['https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Estrella%20blanca-9B59vJlM4m3brtBwArY4H5FRpMDOdm.png', 'Clientes satisfechos'],
 ]
 const steps = [
   ['check.png', 'Solicita tu reserva', 'Completa el formulario o contáctanos directamente.'],
@@ -64,7 +64,7 @@ export default function Page() {
 
     <section className="services section" id="servicios"><div className="section-intro"><h2>Soluciones para tu<br />granja y negocio</h2><p>Ofrecemos un servicio integral de distribución de pollitos bebés, con asesoría y acompañamiento en cada etapa.</p><a className="button" href="#contacto">Conocer más <span aria-hidden="true">→</span></a></div><div className="service-grid">{services.map(([icon, title, text, image]) => <article className="service-card" key={title}><img className="card-image" src={`/assets/img/placeholders/${image}`} alt={`Imagen de ${title}`} /><img className="card-icon" src={`/assets/img/icons/${icon}`} alt="" aria-hidden="true" /><h3>{title}</h3><p>{text}</p><a href="#reserva">Conocer más <span aria-hidden="true">→</span></a></article>)}</div></section>
 
-    <section className="trust shell-dark" id="nosotros"><img className="trust-art" src="/assets/img/placeholders/alianza-avinova.jpg" alt="Equipo y alianza de distribución" /><div className="trust-content"><h2>Tu aliado en cada etapa</h2><p>Brindamos confianza, calidad y respaldo en la distribución de pollitos bebés, con un equipo experto y un servicio cercano.</p><div className="trust-points">{trustPoints.map(([icon, text]) => <div key={text}><img src={`/assets/img/icons/${icon}`} alt="" aria-hidden="true" /><span>{text}</span></div>)}</div></div></section>
+    <section className="trust shell-dark" id="nosotros"><img className="trust-art" src="/assets/img/placeholders/alianza-avinova.jpg" alt="Equipo y alianza de distribución" /><div className="trust-content"><h2>Tu aliado en cada etapa</h2><p>Brindamos confianza, calidad y respaldo en la distribución de pollitos bebés, con un equipo experto y un servicio cercano.</p><div className="trust-points">{trustPoints.map(([icon, text]) => <div key={text}><img src={icon} alt="" aria-hidden="true" /><span>{text}</span></div>)}</div></div></section>
 
     <section className="process shell"><h2>Así es como trabajamos</h2><p>Un proceso claro para que recibas tus pollitos en el mejor estado.</p><div className="steps">{steps.map(([icon, title, text], i) => <article key={title}><div className="step-marker"><span>{i + 1}</span><img src={`/assets/img/icons/${icon}`} alt="" aria-hidden="true" /></div><div><h3>{title}</h3><p>{text}</p></div></article>)}</div></section>
 
