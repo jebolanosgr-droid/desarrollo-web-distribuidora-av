@@ -18,7 +18,7 @@ export function SiteHeader() {
       </button>
       <nav className={menuOpen ? 'nav open' : 'nav'} aria-label="Navegación principal">
         <a href="/">Inicio</a>
-        <a href="/#nosotros">Conócenos</a>
+        <a href="/conocenos">Conócenos</a>
         {!isAuthPage && <a href="/reserva">Reserva</a>}
         <a href="/#contacto">Contacto</a>
       </nav>
