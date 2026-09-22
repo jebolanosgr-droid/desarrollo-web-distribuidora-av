@@ -14,10 +14,10 @@ const values = [
 ]
 
 const benefits = [
-  ['star', 'Calidad superior'],
-  ['truck', 'Entregas seguras'],
-  ['people', 'Atención personalizada'],
-  ['home', 'Cobertura regional'],
+  ['star-white', 'Calidad superior'],
+  ['truck-white', 'Entregas seguras'],
+  ['people-white', 'Atención personalizada'],
+  ['home-white', 'Cobertura regional'],
 ]
 
 export default function ConocenosPage() {
