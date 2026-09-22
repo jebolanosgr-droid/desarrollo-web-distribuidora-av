@@ -12,9 +12,9 @@
 @media(max-width:760px){.footer-brand .brand img{width:155px}}
 
 /* Ajuste fiel al bloque de referencia: imagen a la izquierda y beneficios alineados a la derecha. */
-.trust{width:min(884px,calc(100% - 110px));margin-left:auto;margin-right:auto;grid-template-columns:minmax(280px, .95fr) minmax(0, 1.35fr);align-items:stretch;min-height:250px;padding:0;gap:0;overflow:hidden}
-.trust-art{width:100%;height:100%;min-height:250px;object-fit:cover;display:block}
-.trust-content{display:flex;flex-direction:column;justify-content:center;padding:28px 34px}
+.trust{width:min(884px,calc(100% - 80px));margin-left:auto;margin-right:auto;grid-template-columns:minmax(240px, .9fr) minmax(0, 1.35fr);align-items:stretch;min-height:220px;padding:0;gap:0;overflow:hidden}
+.trust-art{width:100%;height:100%;min-height:220px;object-fit:cover;display:block}
+.trust-content{display:flex;flex-direction:column;justify-content:center;padding:24px 30px}
 .trust-content h2{margin:0 0 8px;text-align:left}
 .trust-content>p{max-width:470px;margin:0;line-height:1.45}
 .trust-points{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-top:19px}
@@ -30,14 +30,14 @@
   .benefits{grid-column:1 / -1;gap:48px;margin-top:18px}
   .services{padding-left:66px;padding-right:66px}
   .service-grid{gap:16px}
-  .trust{width:calc(100% - 152px);max-width:none;min-height:356px}
-  .trust-art{min-height:356px}
-  .trust-content{padding:42px 76px}
-  .trust-content h2{font-size:34px}
-  .trust-content>p{font-size:14px}
-  .trust-points{gap:32px;margin-top:34px}
-  .trust-points img{width:40px;height:40px}
-  .trust-points span{font-size:14px;max-width:120px}
+  .trust{width:calc(100% - 152px);max-width:none;min-height:280px}
+  .trust-art{min-height:280px}
+  .trust-content{padding:30px 48px}
+  .trust-content h2{font-size:28px}
+  .trust-content>p{font-size:12px}
+  .trust-points{gap:24px;margin-top:24px}
+  .trust-points img{width:34px;height:34px}
+  .trust-points span{font-size:12px;max-width:110px}
   .process{padding:68px 66px 76px}
   .process h2{font-size:34px}
   .process>p{font-size:14px}
