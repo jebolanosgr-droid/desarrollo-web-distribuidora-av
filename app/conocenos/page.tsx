@@ -34,12 +34,13 @@ export default function ConocenosPage() {
         <div>
           <span className="conocenos-kicker">CONÓCENOS</span>
           <h2>Conoce Avinova Group</h2>
-          <p>Conectamos granjas y clientes con pollitos de la mejor calidad, garantizando un proceso seguro, rápido y confiable.</p>
-          <p>Desde Huila y Caquetá trabajamos para acercar productos avícolas de excelente genética a productores, distribuidores y negocios de la región.</p>
-          <p>Nuestro compromiso es acompañar cada entrega con responsabilidad, atención personalizada y estándares de calidad.</p>
-          <a className="conocenos-button" href="#historia">Conoce nuestra historia <span aria-hidden="true">→</span></a>
+          <p>Conectamos granjas y clientes con pollitos de la mejor calidad,<br />garantizando un proceso seguro, rápido y confiable.<br />Desde Ibagué llevamos genética de excelencia a productores<br />y distribuidores en todo el departamento del Caquetá,<br />garantizando calidad, confianza y acompañamiento en cada<br />entrega.</p>
+          <div className="conocenos-intro-actions">
+            <a className="conocenos-button" href="#contacto">Contactanos <span aria-hidden="true">→</span></a>
+            <a className="conocenos-button conocenos-button-outline" href="#cobertura">Ver cobertura <span aria-hidden="true">●</span></a>
+          </div>
         </div>
-        <img src="/assets/img/conocenos-propuesta.png" alt="Pollitos durante el proceso de distribución" loading="lazy" />
+        <img src="/assets/img/conocenos-intro.png" alt="Pollitos de Avinova Group" loading="lazy" />
       </section>
 
       <section id="historia" className="conocenos-card conocenos-history">
