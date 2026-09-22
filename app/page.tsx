@@ -3,10 +3,10 @@
 import { useEffect, useState } from 'react'
 
 const heroSlides = [
-  { image: '/assets/img/placeholders/hero-1.jpg', alt: 'Pollitos bebés listos para distribución' },
-  { image: '/assets/img/placeholders/hero-2.jpg', alt: 'Proceso de distribución de pollitos' },
-  { image: '/assets/img/placeholders/hero-3.jpg', alt: 'Atención y entrega de pedidos' },
-  { image: '/assets/img/placeholders/hero-4.jpg', alt: 'Pollitos de engorde de alta calidad' },
+  { image: '/assets/img/placeholders/pollitos-montana.png', alt: 'Pollitos bebés en un campo frente a las montañas' },
+  { image: '/assets/img/placeholders/pollitos-montana.png', alt: 'Pollitos bebés en un campo frente a las montañas' },
+  { image: '/assets/img/placeholders/pollitos-montana.png', alt: 'Pollitos bebés en un campo frente a las montañas' },
+  { image: '/assets/img/placeholders/pollitos-montana.png', alt: 'Pollitos bebés en un campo frente a las montañas' },
 ]
 
 const benefits = [
@@ -56,7 +56,7 @@ export default function Page() {
 
     <section className="services section" id="servicios"><div className="section-intro"><h2>Soluciones para tu<br />granja y negocio</h2><p>Ofrecemos un servicio integral de distribución de pollitos bebés, con asesoría y acompañamiento en cada etapa.</p><a className="button" href="#contacto">Conocer más <span aria-hidden="true">→</span></a></div><div className="service-grid">{services.map(([icon, title, text, image]) => <article className="service-card" key={title}><img className="card-image" src={`/assets/img/placeholders/${image}`} alt={`Imagen de ${title}`} /><img className="card-icon" src={`/assets/img/icons/${icon}`} alt="" aria-hidden="true" /><h3>{title}</h3><p>{text}</p><a href="#reserva">Conocer más <span aria-hidden="true">→</span></a></article>)}</div></section>
 
-    <section className="trust shell-dark" id="nosotros"><img className="trust-art" src="/assets/img/placeholders/alianza-avinova.jpg" alt="Equipo y alianza de distribución" /><div className="trust-content"><h2>Tu aliado en cada etapa</h2><p>Brindamos confianza, calidad y respaldo en la distribución de pollitos bebés, con un equipo experto y un servicio cercano.</p><div className="trust-points">{trustPoints.map(([icon, text]) => <div key={text}><img src={icon} alt="" aria-hidden="true" /><span>{text}</span></div>)}</div></div></section>
+    <section className="trust shell-dark" id="nosotros"><img className="trust-art" src="/assets/img/placeholders/pollitos-montana.png" alt="Pollitos bebés en un campo frente a las montañas" /><div className="trust-content"><h2>Tu aliado en cada etapa</h2><p>Brindamos confianza, calidad y respaldo en la distribución de pollitos bebés, con un equipo experto y un servicio cercano.</p><div className="trust-points">{trustPoints.map(([icon, text]) => <div key={text}><img src={icon} alt="" aria-hidden="true" /><span>{text}</span></div>)}</div></div></section>
 
     <section className="process shell"><h2>Así es como trabajamos</h2><p>Un proceso claro para que recibas tus pollitos en el mejor estado.</p><div className="steps">{steps.map(([icon, title, text], i) => <article key={title}><div className="step-marker"><span>{i + 1}</span><img src={icon.startsWith('http') ? icon : `/assets/img/icons/${icon}`} alt="" aria-hidden="true" /></div><div><h3>{title}</h3><p>{text}</p></div></article>)}</div></section>
 
