@@ -44,13 +44,12 @@ export default function ConocenosPage() {
       </section>
 
       <section id="historia" className="conocenos-card conocenos-history">
-        <img src="/assets/img/conocenos-historia.png" alt="Operación de distribución avícola de Avinova Group" loading="lazy" />
+        <img src="/assets/img/conocenos-historia-ref.png" alt="Camión de Avinova Group durante una entrega" loading="lazy" />
         <div>
           <span className="conocenos-kicker">NUESTRA HISTORIA</span>
           <h2>Comprometidos con la calidad desde el primer día</h2>
-          <p>Avinova Group nace con el propósito de fortalecer la conexión entre productores, distribuidores y clientes del sector avícola.</p>
-          <p>Con el tiempo, hemos construido una operación enfocada en la distribución responsable de pollitos COBB, seleccionados bajo altos estándares de calidad y desempeño.</p>
-          <p>Nuestro crecimiento se basa en la confianza de nuestros clientes, el compromiso de nuestro equipo y la búsqueda constante de procesos más seguros y eficientes.</p>
+          <p>En Avinova Group trabajamos para conectar a las tiendas avícolas con pollitos COBB de excelente genética y desempeño.</p>
+          <p>Nuestro objetivo es ofrecer aves sanas y listas para contribuir al crecimiento de cada negocio, respaldadas por un proceso de distribución responsable y eficiente.</p>
         </div>
       </section>
 
@@ -59,9 +58,12 @@ export default function ConocenosPage() {
         <article className="conocenos-card conocenos-mission-card"><div className="conocenos-icon"><img src="/assets/img/icons/star.png" alt="" aria-hidden="true" /></div><span className="conocenos-kicker">NUESTRA PROYECCIÓN</span><h2>Nuestra visión</h2><p>Ser la distribuidora avícola de referencia en la región, reconocida por la calidad de sus productos, la eficiencia de sus entregas y la confianza construida con cada cliente.</p></article>
       </section>
 
-      <section className="conocenos-values">
-        <div className="conocenos-section-heading"><span className="conocenos-kicker">NUESTROS VALORES</span><h2>Lo que nos representa</h2><p>Cada decisión que tomamos está guiada por principios que fortalecen nuestra relación con clientes, productores y aliados.</p></div>
-        <div className="conocenos-values-grid">{values.map(([icon, title, text]) => <article key={title}><div className="conocenos-icon"><img src={`/assets/img/icons/${icon}.png`} alt="" aria-hidden="true" /></div><h3>{title}</h3><p>{text}</p></article>)}</div>
+      <section className="conocenos-values" aria-label="Valores de Avinova Group">
+        <div className="conocenos-values-grid">
+          <article><div className="conocenos-icon"><img src="/assets/img/icons/shield.png" alt="" aria-hidden="true" /></div><div><h3>Calidad garantizada</h3><p>Distribuimos pollitos COBB seleccionados bajo altos estándares de calidad</p></div></article>
+          <article><div className="conocenos-icon"><img src="/assets/img/icons/truck.png" alt="" aria-hidden="true" /></div><div><h3>Cobertura regional</h3><p>Realizamos la distribución hasta múltiples municipios del Caquetá y Huila</p></div></article>
+          <article><div className="conocenos-icon"><img src="/assets/img/icons/people.png" alt="" aria-hidden="true" /></div><div><h3>Compromiso y confianza</h3><p>Construimos relaciones duraderas basadas en cumplimiento y atención personalizada</p></div></article>
+        </div>
       </section>
 
       <section className="conocenos-card conocenos-coverage"><div><span className="conocenos-kicker">NUESTRA COBERTURA</span><h2>Llegamos a más lugares para impulsar el crecimiento avícola</h2><p>Realizamos distribución en diferentes municipios del Huila y Caquetá, acercando productos confiables a productores, tiendas avícolas y negocios de la región.</p><div className="conocenos-regions"><span><img src="/assets/img/icons/home.png" alt="" aria-hidden="true" />Huila</span><span><img src="/assets/img/icons/home.png" alt="" aria-hidden="true" />Caquetá</span></div></div><div className="conocenos-coverage-art"><img src="/assets/img/conocenos-hero.png" alt="Paisaje de la región de cobertura de Avinova" loading="lazy" /></div></section>
