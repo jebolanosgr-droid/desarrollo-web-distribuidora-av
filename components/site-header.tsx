@@ -19,7 +19,6 @@ export function SiteHeader() {
       <nav className={menuOpen ? 'nav open' : 'nav'} aria-label="Navegación principal">
         <a href="/">Inicio</a>
         <a href="/#nosotros">Conócenos</a>
-        {!isAuthPage && <a href="/#servicios">Servicios</a>}
         {!isAuthPage && <a href="/reserva">Reserva</a>}
         <a href="/#contacto">Contacto</a>
       </nav>
