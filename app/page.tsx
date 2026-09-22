@@ -62,7 +62,6 @@ export default function Page() {
 
     <section className="contact section" id="contacto"><div><h2>¿Necesitas pollitos bebés?</h2><p>Completa el formulario con los datos de tu solicitud y nos pondremos en contacto contigo lo antes posible.</p><div className="contact-line"><a href="tel:+573205135667" aria-label="Llamar a Avinova al número 320 513 5667"><img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/telefono-FeH0yfGiLlN9dLEj8vSiISqd576Aau.png" alt="" aria-hidden="true" /><span>(57) 320 513 5667</span></a></div><div className="contact-line"><a href="mailto:avinova@correo.com" aria-label="Enviar correo a Avinova"><img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/correo-GL97FdXMCD2UG8X1IxC2rxeY2t7tpN.png" alt="" aria-hidden="true" /><span>avinova@correo.com</span></a></div></div><div className="map-card"><iframe title="Mapa de referencia de Avinova" src="https://www.google.com/maps?q=Ibagué,Tolima,Colombia&output=embed" loading="lazy" /></div></section>
 
-    <section className="reservation shell-dark" id="reserva"><div><h2>Tu próximo pedido comienza aquí</h2><p>Consulta disponibilidad y recibe atención personalizada para tu granja.</p></div><a className="button reservation-button" href="mailto:avinova@correo.com">Solicitar reserva <span aria-hidden="true">→</span></a></section>
-    
+
   </main>
 }
