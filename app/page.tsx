@@ -27,7 +27,7 @@ const trustPoints = [
   ['https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Estrella%20blanca-9B59vJlM4m3brtBwArY4H5FRpMDOdm.png', 'Clientes satisfechos'],
 ]
 const steps = [
-  ['check.png', 'Solicita tu reserva', 'Completa el formulario o contáctanos directamente.'],
+  ['https://hebbkx1anhila5yf.public.blob.vercel-storage.com/form-1XJbVMIKNOfTOgJUWXSmOs9vlrQ00z.png', 'Solicita tu reserva', 'Completa el formulario o contáctanos directamente.'],
   ['check.png', 'Confirmamos', 'Verificamos disponibilidad y te damos la confirmación.'],
   ['truck.png', 'Preparamos el pedido', 'Empacamos y organizamos la entrega.'],
   ['home.png', 'Recibes tus pollitos', 'En el lugar y fecha acordada.'],
@@ -66,7 +66,7 @@ export default function Page() {
 
     <section className="trust shell-dark" id="nosotros"><img className="trust-art" src="/assets/img/placeholders/alianza-avinova.jpg" alt="Equipo y alianza de distribución" /><div className="trust-content"><h2>Tu aliado en cada etapa</h2><p>Brindamos confianza, calidad y respaldo en la distribución de pollitos bebés, con un equipo experto y un servicio cercano.</p><div className="trust-points">{trustPoints.map(([icon, text]) => <div key={text}><img src={icon} alt="" aria-hidden="true" /><span>{text}</span></div>)}</div></div></section>
 
-    <section className="process shell"><h2>Así es como trabajamos</h2><p>Un proceso claro para que recibas tus pollitos en el mejor estado.</p><div className="steps">{steps.map(([icon, title, text], i) => <article key={title}><div className="step-marker"><span>{i + 1}</span><img src={`/assets/img/icons/${icon}`} alt="" aria-hidden="true" /></div><div><h3>{title}</h3><p>{text}</p></div></article>)}</div></section>
+    <section className="process shell"><h2>Así es como trabajamos</h2><p>Un proceso claro para que recibas tus pollitos en el mejor estado.</p><div className="steps">{steps.map(([icon, title, text], i) => <article key={title}><div className="step-marker"><span>{i + 1}</span><img src={icon.startsWith('http') ? icon : `/assets/img/icons/${icon}`} alt="" aria-hidden="true" /></div><div><h3>{title}</h3><p>{text}</p></div></article>)}</div></section>
 
     <section className="contact section" id="contacto"><div><h2>¿Necesitas pollitos bebés?</h2><p>Completa el formulario con los datos de tu solicitud y nos pondremos en contacto contigo lo antes posible.</p><div className="contact-line"><a href="tel:+573205135667" aria-label="Llamar a Avinova al número 320 513 5667"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 2.8 9.2 2l2.1 5.1-2.5 1.5a14.2 14.2 0 0 0 6.6 6.6l1.5-2.5 5.1 2.1-.8 2.6a2.7 2.7 0 0 1-3 1.8C11.5 18 6 12.5 4.8 5.8a2.7 2.7 0 0 1 1.8-3Z" /></svg><span>(57) 320 513 5667</span></a></div><div className="contact-line"><a href="mailto:avinova@correo.com" aria-label="Enviar correo a Avinova"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5.5h18v13H3zM4 7l8 6 8-6" /></svg><span>avinova@correo.com</span></a></div></div><div className="map-card"><iframe title="Ubicación de referencia en Ibagué, Tolima" src="https://www.google.com/maps?q=Ibagué,Tolima,Colombia&output=embed" loading="lazy" /><a className="map-link" href="https://www.google.com/maps/search/?api=1&query=4.4389,-75.2322" target="_blank" rel="noopener noreferrer">Abrir en Google Maps</a><small>Ubicación de referencia en Ibagué, Tolima.</small></div></section>
 
