@@ -21,10 +21,10 @@ const services = [
   ['search.png', 'Asesoría personalizada', 'Encuentra la mejor alternativa para crecer con confianza.', 'servicio-asesoria.jpg'],
 ]
 const trustPoints = [
-  ['shield.png', 'Calidad garantizada'],
-  ['truck.png', 'Entrega oportuna'],
-  ['headset.png', 'Asesoría especializada'],
-  ['star.png', 'Clientes satisfechos'],
+  ['https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Escudo%20blanco-ONOgW6TUluan7HT0JunE5QfQOoLbT2.png', 'Calidad garantizada'],
+  ['https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Carro%20blanco-m81WrZJLYDnocXpebhIgcpJB89FGue.png', 'Entrega oportuna'],
+  ['https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Auri%20blanco-UVCtb2ZQ4jaJ5Ng3WqY7hKUrAzZdpk.png', 'Asesoría especializada'],
+  ['https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Estrella%20blanca-RZoiiQN7HSN9vllfMk9q3rlUyUonam.png', 'Clientes satisfechos'],
 ]
 const steps = [
   ['check.png', 'Solicita tu reserva', 'Completa el formulario o contáctanos directamente.'],
