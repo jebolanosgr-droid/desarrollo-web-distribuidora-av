@@ -1,9 +1,12 @@
 'use client'
 
 import { useState } from 'react'
+import { usePathname } from 'next/navigation'
 
 export function SiteHeader() {
   const [menuOpen, setMenuOpen] = useState(false)
+  const pathname = usePathname()
+  const isAuthPage = pathname === '/login' || pathname === '/registro'
 
   return (
     <header className="site-header">
@@ -16,11 +19,11 @@ export function SiteHeader() {
       <nav className={menuOpen ? 'nav open' : 'nav'} aria-label="Navegación principal">
         <a href="/">Inicio</a>
         <a href="/#nosotros">Conócenos</a>
-        <a href="/#servicios">Servicios</a>
-        <a href="/reserva">Reserva</a>
+        {!isAuthPage && <a href="/#servicios">Servicios</a>}
+        {!isAuthPage && <a href="/reserva">Reserva</a>}
         <a href="/#contacto">Contacto</a>
       </nav>
-      <a className="button button-small" href="/login">Iniciar sesión</a>
+      {!isAuthPage && <a className="button button-small" href="/login">Iniciar sesión</a>}
     </header>
   )
 }
