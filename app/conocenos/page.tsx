@@ -70,7 +70,7 @@ export default function ConocenosPage() {
 
       <section className="conocenos-proposal"><div className="conocenos-proposal-image"><img src="/assets/img/conocenos-propuesta-ref.png" alt="Trabajador de Avinova Group llevando una caja de pollitos" loading="lazy" /></div><div className="conocenos-proposal-content"><h2>Llevando genética de excelencia<br />al Caquetá</h2><p>Trabajamos para que cada cliente reciba productos confiables, con logística organizada y atención cercana</p><div className="conocenos-benefits">{benefits.map(([icon, title]) => <div key={title}><img src={`/assets/img/icons/${icon}.png`} alt="" aria-hidden="true" /><strong>{title}</strong></div>)}</div></div></section>
 
-      <section className="conocenos-contact"><span className="conocenos-kicker">ESTAMOS PARA ACOMPAÑARTE</span><h2>¿Quieres conocer más sobre nosotros?</h2><p>Estamos disponibles para resolver tus dudas y acompañarte en tus necesidades de distribución avícola.</p><div><a className="conocenos-button" href="/#contacto">Contáctanos</a><a className="conocenos-button conocenos-button-outline" href="/reserva">Haz una reserva</a></div></section>
+      <section className="conocenos-contact"><span className="conocenos-kicker">ESTAMOS PARA ACOMPAÑARTE</span><h2>¿Quieres conocer más sobre nosotros?</h2><p>Estamos disponibles para resolver tus dudas y acompañarte en tus necesidades de distribución avícola.</p><div><a className="conocenos-button conocenos-button-outline" href="/#contacto">Contáctanos</a><a className="conocenos-button conocenos-button-outline" href="/reserva">Haz una reserva</a></div></section>
     </main>
   )
 }
