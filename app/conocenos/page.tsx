@@ -25,11 +25,9 @@ export default function ConocenosPage() {
     <main className="conocenos-page">
       <section className="conocenos-hero" aria-labelledby="conocenos-title">
         <div className="conocenos-hero-copy">
-          <span className="conocenos-kicker">CONÓCENOS</span>
-          <h1 id="conocenos-title">Conectamos calidad, confianza y crecimiento</h1>
-          <p>En Avinova Group trabajamos para llevar pollitos de excelente genética y productos confiables a nuestros clientes, contribuyendo al crecimiento del sector avícola en la región.</p>
+          <h1 id="conocenos-title">Nuestro misión es<br />llegar a ser la distribuidora<br />#1 del país</h1>
+          <a className="conocenos-button" href="#historia">CONÓCENOS</a>
         </div>
-        <img src="/assets/img/conocenos-hero.png" alt="Pollitos de Avinova Group en el campo" />
       </section>
 
       <section className="conocenos-card conocenos-intro">
