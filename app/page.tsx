@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 
 const heroSlides = [
   { image: '/assets/img/placeholders/pollitos-montana.png', alt: 'Pollitos bebés en un campo frente a las montañas' },
-  { image: '/assets/img/placeholders/pollitos-montana.png', alt: 'Pollitos bebés en un campo frente a las montañas' },
+  { image: '/assets/img/conocenos-propuesta-ref.png', alt: 'Trabajador de Avinova Group llevando una caja de pollitos' },
   { image: '/assets/img/placeholders/pollitos-montana.png', alt: 'Pollitos bebés en un campo frente a las montañas' },
   { image: '/assets/img/placeholders/pollitos-montana.png', alt: 'Pollitos bebés en un campo frente a las montañas' },
 ]
