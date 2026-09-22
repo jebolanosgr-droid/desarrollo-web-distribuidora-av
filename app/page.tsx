@@ -35,7 +35,6 @@ const steps = [
 
 export default function Page() {
   const [slide, setSlide] = useState(0)
-  const [menuOpen, setMenuOpen] = useState(false)
   const next = () => setSlide((value) => (value + 1) % heroSlides.length)
   const previous = () => setSlide((value) => (value - 1 + heroSlides.length) % heroSlides.length)
 
@@ -49,13 +48,6 @@ export default function Page() {
   })
 
   return <main className="avinova-site">
-    <header className="site-header">
-      <a className="brand" href="#inicio" aria-label="Avinova inicio"><img src="/assets/img/logo/logo-avinova.png" alt="Avinova" /></a>
-      <button className="menu-toggle" aria-label={menuOpen ? 'Cerrar menú' : 'Abrir menú'} aria-expanded={menuOpen} onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? '×' : '☰'}</button>
-      <nav className={menuOpen ? 'nav open' : 'nav'} aria-label="Navegación principal"><a href="#inicio">Inicio</a><a href="#nosotros">Conócenos</a><a href="#servicios">Servicios</a><a href="#reserva">Reserva</a><a href="#contacto">Contacto</a></nav>
-      <a className="button button-small" href="#reserva">Iniciar sesión</a>
-    </header>
-
     <section className="hero shell" id="inicio">
       <div className="hero-copy"><h1>Pollitos bebés,<br />directo a tu negocio</h1><p>Conectamos granjas y clientes con pollitos de la mejor calidad, garantizando un proceso seguro, rápido y confiable.</p><div className="button-row"><a className="button" href="#servicios">Ver servicios <span aria-hidden="true">→</span></a><a className="button button-outline" href="#reserva">Hacer una reserva</a></div></div>
       <div className="hero-visual" tabIndex={0} aria-label="Carrusel de imágenes"><img src={heroSlides[slide].image} alt={heroSlides[slide].alt} /><div className="slider-controls"><button onClick={previous} aria-label="Imagen anterior">←</button>{heroSlides.map((item, index) => <button key={item.image} className={index === slide ? 'dot active' : 'dot'} onClick={() => setSlide(index)} aria-label={`Ver imagen ${index + 1}`} aria-current={index === slide ? 'true' : undefined}> </button>)}<button onClick={next} aria-label="Imagen siguiente">→</button></div></div>
@@ -71,7 +63,6 @@ export default function Page() {
     <section className="contact section" id="contacto"><div><h2>¿Necesitas pollitos bebés?</h2><p>Completa el formulario con los datos de tu solicitud y nos pondremos en contacto contigo lo antes posible.</p><div className="contact-line"><a href="tel:+573205135667" aria-label="Llamar a Avinova al número 320 513 5667"><img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/telefono-FeH0yfGiLlN9dLEj8vSiISqd576Aau.png" alt="" aria-hidden="true" /><span>(57) 320 513 5667</span></a></div><div className="contact-line"><a href="mailto:avinova@correo.com" aria-label="Enviar correo a Avinova"><img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/correo-GL97FdXMCD2UG8X1IxC2rxeY2t7tpN.png" alt="" aria-hidden="true" /><span>avinova@correo.com</span></a></div></div><div className="map-card"><iframe title="Mapa de referencia de Avinova" src="https://www.google.com/maps?q=Ibagué,Tolima,Colombia&output=embed" loading="lazy" /></div></section>
 
     <section className="reservation shell-dark" id="reserva"><div><h2>Tu próximo pedido comienza aquí</h2><p>Consulta disponibilidad y recibe atención personalizada para tu granja.</p></div><a className="button reservation-button" href="mailto:avinova@correo.com">Solicitar reserva <span aria-hidden="true">→</span></a></section>
-    <footer><div className="footer-brand"><a className="brand" href="#inicio"><img src="/assets/img/logo/logo-avinova.png" alt="Avinova" /></a></div><nav className="footer-nav" aria-label="Navegación del pie de página"><a href="#inicio">Inicio</a><a href="#nosotros">Conócenos</a><a href="#servicios">Servicios</a><a href="#reserva">Reserva</a><a href="#contacto">Contacto</a></nav><div className="footer-contact"><span>(57) 320 513 5667</span><span>avinova@correo.com</span><span>Ibagué, Tolima, Colombia</span></div><div className="socials"><a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Visitar Facebook de Avinova"><img src="/assets/img/social/facebook.png" alt="" /></a><a href="https://wa.me/573205135667" target="_blank" rel="noopener noreferrer" aria-label="Contactar por WhatsApp a Avinova"><img src="/assets/img/social/whatsapp.png" alt="" /></a><a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Visitar Instagram de Avinova"><img src="/assets/img/social/instagram.png" alt="" /></a></div><div className="footer-bottom">© 2026 Avinova. Todos los derechos reservados.</div></footer>
     
   </main>
 }

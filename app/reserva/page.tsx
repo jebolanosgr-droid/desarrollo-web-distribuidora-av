@@ -47,12 +47,6 @@ export default function ReservaPage() {
 
   return (
     <main className="reserva-page">
-      <header className="reserva-header">
-        <a className="reserva-brand" href="/" aria-label="Avinova inicio"><img src="/assets/img/logo/logo-avinova.png" alt="Avinova" /></a>
-        <nav aria-label="Navegación principal"><a href="/">Inicio</a><a href="/#nosotros">Conócenos</a><a className="active" href="/reserva">Reserva</a><a href="/#contacto">Contacto</a></nav>
-        <a className="reserva-login" href="/login">Iniciar sesión</a>
-      </header>
-
       <section className="reserva-hero" aria-labelledby="reserva-title">
         <img src="/assets/img/placeholders/hero-4.jpg" alt="Pollitos de engorde para reserva" />
         <div><h1 id="reserva-title">Reserva de pollitos</h1><p>Selecciona la cantidad de cajas, el género y la semana para<br className="desktop-only" /> asegurar tus pollitos de engorde.</p></div>
@@ -87,7 +81,6 @@ export default function ReservaPage() {
         <section className="reserva-help"><Icon src={icons.chick} alt="" /><div><h2>¿Tienes dudas?</h2><p>Si necesitas más información sobre nuestras reservas, contáctanos. Estamos para ayudarte.</p></div><div className="reserva-socials"><a href="https://facebook.com" aria-label="Facebook"><Icon src={icons.facebook} /></a><a href="https://wa.me/573205135667" aria-label="WhatsApp"><Icon src={icons.whatsapp} /></a><a href="https://instagram.com" aria-label="Instagram"><Icon src={icons.instagram} /></a></div></section>
       </section>
 
-      <footer className="reserva-footer"><a className="reserva-brand" href="/" aria-label="Avinova inicio"><img src="/assets/img/logo/logo-avinova.png" alt="Avinova" /></a><nav aria-label="Enlaces del pie de página"><a href="/">Inicio</a><a href="/#nosotros">Conócenos</a><a href="/#servicios">Servicios</a><a href="/#contacto">Consultorías</a><a href="/#contacto">Investigación</a></nav><div className="reserva-footer-socials"><Icon src={icons.facebook} /><Icon src={icons.whatsapp} /><Icon src={icons.instagram} /></div></footer>
     </main>
   )
 }

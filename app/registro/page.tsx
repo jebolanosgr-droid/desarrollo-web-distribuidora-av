@@ -32,12 +32,6 @@ export default function RegistroPage() {
   const submit = (event: FormEvent<HTMLFormElement>) => { event.preventDefault(); setSubmitted(true) }
 
   return <div className="registro-page">
-    <header className="registro-header">
-      <a href="/" className="registro-logo" aria-label="Avinova, inicio"><img src="/assets/img/logo/logo-avinova.png" alt="Avinova" /></a>
-      <nav className="registro-nav" aria-label="Navegación principal"><a href="/">Inicio</a><a href="#conocenos">Conócenos</a><a href="#reserva">Reserva</a><a href="#contacto">Contacto</a></nav>
-      <div className="registro-actions"><a className="registro-login" href="/login">Iniciar sesión</a></div>
-    </header>
-
     <main className="registro-main">
       <section className="registro-card" aria-labelledby="registro-title">
         <div className="registro-intro">
@@ -60,7 +54,6 @@ export default function RegistroPage() {
         </form>
       </section>
     </main>
-    <footer className="registro-footer"><div className="registro-footer-inner"><img src="/assets/img/logo/logo-avinova.png" alt="Avinova" /><nav aria-label="Enlaces del pie de página"><a href="/">Inicio</a><a href="#conocenos">Conócenos</a><a href="#reserva">Servicios</a><a href="#contacto">Consultorías</a><a href="#investigacion">Investigación</a></nav><div className="registro-socials" aria-label="Redes sociales"><span>f</span><span>◉</span><span>◎</span></div></div><div className="registro-divider" /></footer>
   </div>
 }
 

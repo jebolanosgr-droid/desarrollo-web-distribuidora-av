@@ -32,12 +32,6 @@ export default function LoginPage() {
   const submit = (event: FormEvent<HTMLFormElement>) => { event.preventDefault(); setSubmitted(true) }
 
   return <div className="login-page">
-    <header className="login-header">
-      <a href="/" className="login-logo" aria-label="Avinova, inicio"><img src="/assets/img/logo/logo-avinova.png" alt="Avinova" /></a>
-      <nav className="login-nav" aria-label="Navegación principal"><a href="/">Inicio</a><a href="/#conocenos">Conócenos</a><a href="/#reserva">Reserva</a><a href="/#contacto">Contacto</a></nav>
-      <div className="login-actions"><a className="login-session-link" href="/login">Iniciar sesión</a></div>
-    </header>
-
     <main className="login-main">
       <section className="login-card" aria-labelledby="login-title">
         <div className="login-intro">
@@ -59,7 +53,6 @@ export default function LoginPage() {
       </section>
     </main>
 
-    <footer className="login-footer"><div className="login-footer-inner"><img src="/assets/img/logo/logo-avinova.png" alt="Avinova" /><nav aria-label="Enlaces del pie de página"><a href="/">Inicio</a><a href="/#conocenos">Conócenos</a><a href="/#reserva">Servicios</a><a href="/#contacto">Consultorías</a><a href="/#investigacion">Investigación</a></nav><div className="login-socials" aria-label="Redes sociales"><span>f</span><span>◉</span><span>◎</span></div></div><div className="login-divider" /></footer>
   </div>
 }
 

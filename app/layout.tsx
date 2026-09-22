@@ -1,6 +1,8 @@
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
 import './globals.css'
+import { SiteFooter } from '@/components/site-footer'
+import { SiteHeader } from '@/components/site-header'
 
 export const metadata: Metadata = {
   title: 'Avinova | Pollitos bebés para tu negocio',
@@ -41,7 +43,9 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body className="antialiased">
+        <SiteHeader />
         {children}
+        <SiteFooter />
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
     </html>
