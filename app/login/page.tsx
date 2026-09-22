@@ -35,7 +35,7 @@ export default function LoginPage() {
     <header className="login-header">
       <a href="/" className="login-logo" aria-label="Avinova, inicio"><img src="/assets/img/logo/logo-avinova.png" alt="Avinova" /></a>
       <nav className="login-nav" aria-label="Navegación principal"><a href="/">Inicio</a><a href="/#conocenos">Conócenos</a><a href="/#reserva">Reserva</a><a href="/#contacto">Contacto</a></nav>
-      <div className="login-actions"><button className="login-search" type="button" aria-label="Buscar">⌕</button><a className="login-session-link" href="/login">Iniciar sesión</a></div>
+      <div className="login-actions"><a className="login-session-link" href="/login">Iniciar sesión</a></div>
     </header>
 
     <main className="login-main">

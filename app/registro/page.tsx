@@ -35,14 +35,13 @@ export default function RegistroPage() {
     <header className="registro-header">
       <a href="/" className="registro-logo" aria-label="Avinova, inicio"><img src="/assets/img/logo/logo-avinova.png" alt="Avinova" /></a>
       <nav className="registro-nav" aria-label="Navegación principal"><a href="/">Inicio</a><a href="#conocenos">Conócenos</a><a href="#reserva">Reserva</a><a href="#contacto">Contacto</a></nav>
-      <div className="registro-actions"><button className="registro-search" aria-label="Buscar">⌕</button><a className="registro-login" href="/login">Iniciar sesión</a></div>
+      <div className="registro-actions"><a className="registro-login" href="/login">Iniciar sesión</a></div>
     </header>
 
     <main className="registro-main">
       <section className="registro-card" aria-labelledby="registro-title">
         <div className="registro-intro">
-          {/* Reemplazar este recurso por la fotografía final de registro. */}
-          <div className="registro-placeholder" role="img" aria-label="Imagen de presentación de Avinova"><span>Imagen de Avinova</span></div>
+          <img className="registro-placeholder" src="/assets/img/placeholders/login-placeholder.png" alt="Pollitos bebés en una granja avícola" />
           <h1 id="registro-title">Únete a Avinova</h1>
           <p>Regístrate y accede a nuestros servicios de reserva de pollitos de engorde. Es rápido, fácil y seguro.</p>
           <div className="registro-benefits"><Benefit icon={icons.calendar} text="Gestiona tus reservas" /><Benefit icon={icons.bell} text="Recibe notificaciones" /><Benefit icon={icons.tag} text="Accede a promociones" /></div>
