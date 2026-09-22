@@ -2,6 +2,8 @@
 @import 'tw-animate-css';
 @import 'shadcn/tailwind.css';
 
+.contact-line img{width:22px;height:22px;object-fit:contain;display:block}.map-card{overflow:hidden}.map-card iframe{display:block}
+
 /* Ajuste fiel al bloque de referencia: imagen a la izquierda y beneficios alineados a la derecha. */
 .trust{grid-template-columns:minmax(280px, 1fr) minmax(0, 1.35fr);align-items:stretch;min-height:310px;padding:0;gap:0;overflow:hidden}
 .trust-art{width:100%;height:100%;min-height:310px;object-fit:cover;display:block}
