@@ -12,7 +12,7 @@
 @media(max-width:760px){.footer-brand .brand img{width:155px}}
 
 /* Ajuste fiel al bloque de referencia: imagen a la izquierda y beneficios alineados a la derecha. */
-.trust{width:min(884px,calc(100% - 110px));grid-template-columns:minmax(280px, .95fr) minmax(0, 1.35fr);align-items:stretch;min-height:250px;padding:0;gap:0;overflow:hidden}
+.trust{width:min(884px,calc(100% - 110px));margin-left:auto;margin-right:auto;grid-template-columns:minmax(280px, .95fr) minmax(0, 1.35fr);align-items:stretch;min-height:250px;padding:0;gap:0;overflow:hidden}
 .trust-art{width:100%;height:100%;min-height:250px;object-fit:cover;display:block}
 .trust-content{display:flex;flex-direction:column;justify-content:center;padding:28px 34px}
 .trust-content h2{margin:0 0 8px;text-align:left}
