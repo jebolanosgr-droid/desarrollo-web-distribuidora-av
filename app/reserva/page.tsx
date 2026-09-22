@@ -48,7 +48,7 @@ export default function ReservaPage() {
   return (
     <main className="reserva-page">
       <section className="reserva-hero" aria-labelledby="reserva-title">
-        <img src="/assets/img/placeholders/hero-4.jpg" alt="Pollitos de engorde para reserva" />
+        <img src="/assets/img/placeholders/pollitos-montana.png" alt="Pollitos bebés en un campo frente a las montañas" />
         <div><h1 id="reserva-title">Reserva de pollitos</h1><p>Selecciona la cantidad de cajas, el género y la semana para<br className="desktop-only" /> asegurar tus pollitos de engorde.</p></div>
       </section>
 
