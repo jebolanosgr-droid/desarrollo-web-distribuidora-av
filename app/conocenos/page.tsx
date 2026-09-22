@@ -37,7 +37,7 @@ export default function ConocenosPage() {
           <p>Conectamos granjas y clientes con pollitos de la mejor calidad,<br />garantizando un proceso seguro, rápido y confiable.<br />Desde Ibagué llevamos genética de excelencia a productores<br />y distribuidores en todo el departamento del Caquetá,<br />garantizando calidad, confianza y acompañamiento en cada<br />entrega.</p>
           <div className="conocenos-intro-actions">
             <a className="conocenos-button" href="#contacto">Contactanos <span aria-hidden="true">→</span></a>
-            <a className="conocenos-button conocenos-button-outline" href="#cobertura">Ver cobertura <span aria-hidden="true">●</span></a>
+            <a className="conocenos-button conocenos-button-outline" href="#cobertura">Ver cobertura <img src="/assets/img/ubicacion.png" alt="" aria-hidden="true" /></a>
           </div>
         </div>
         <img src="/assets/img/conocenos-intro.png" alt="Pollitos de Avinova Group" loading="lazy" />
