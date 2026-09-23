@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import './conocenos.css'
 
 export const metadata: Metadata = {
-  title: 'Conócenos | Avinova Group',
+  title: 'Conócen | Avinova Group',
   description: 'Conoce la historia, misión, valores y cobertura regional de Avinova Group.',
 }
 
