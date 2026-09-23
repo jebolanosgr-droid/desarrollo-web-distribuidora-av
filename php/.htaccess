@@ -1,5 +1,10 @@
 Options -Indexes
+
 <FilesMatch "^(config|database|auth|csrf|functions)\.php$">
-  Require all denied
-</FilesMatch
-RedirectMatch 403 ^/(includes|sql)/
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+<IfModule mod_alias.c>
+    RedirectMatch 403 ^/(includes|sql)(/|$)
+</IfModule>
