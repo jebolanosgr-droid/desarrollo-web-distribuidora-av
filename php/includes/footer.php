@@ -1,1 +1,0 @@
-</main><footer class="site-footer"><div><strong>AVINOVA</strong><p>Distribución avícola confiable.</p></div><nav><a href="index.php">Inicio</a><a href="conocenos.php">Conócenos</a><a href="login.php">Acceso</a></nav><small>© <?= date('Y') ?> Avinova</small></footer></body></html>
