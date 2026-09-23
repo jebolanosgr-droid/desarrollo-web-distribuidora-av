@@ -1,0 +1,1 @@
+</main><footer class="site-footer"><div><img src="<?=BASE_URL?>/assets/img/logo/logo-avinova.png" alt="Avinova"><p>Distribución avícola con calidad y confianza.</p></div><div><strong>Contacto</strong><p>Atención personalizada para tu negocio.</p></div><p>© <?=date('Y')?> Avinova. Todos los derechos reservados.</p></footer></body></html>

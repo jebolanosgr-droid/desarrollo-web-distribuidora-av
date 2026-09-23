@@ -1,0 +1,12 @@
+AVINOVA PHP PARA INFINITYFREE
+
+1. Copia todo el contenido de esta carpeta php/ a htdocs/.
+2. En el panel de InfinityFree crea una base MySQL y anota hostname, nombre, usuario y contraseña.
+3. Abre includes/config.example.php, cambia los valores YOUR_* y guárdalo como includes/config.php.
+4. Importa sql/avinova_schema.sql desde phpMyAdmin.
+5. Abre /php/index.php, luego /php/register.php para crear una cuenta.
+6. Prueba login, reserva y dashboard.
+
+No subas config.php a GitHub. BASE_URL debe ser /php si la carpeta se mantiene como /htdocs/php. Si copias el contenido de php/ directamente dentro de htdocs, usa BASE_URL ''.
+
+Para crear un administrador, registra una cuenta y cambia su role a admin desde phpMyAdmin con una consulta preparada por el panel. No uses contraseñas en SQL; la contraseña se crea con password_hash al registrarse.
