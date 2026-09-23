@@ -33,7 +33,7 @@ export default function ConocenosPage() {
       <section className="conocenos-card conocenos-intro">
         <div>
           <span className="conocenos-kicker">CONÓCENOS</span>
-          <h2>Conoce Avinova Group</h2>
+          <h2>Conocp</h2>
           <p>Conectamos granjas y clientes con pollitos de la mejor calidad,<br />garantizando un proceso seguro, rápido y confiable.<br />Desde Ibagué llevamos genética de excelencia a productores<br />y distribuidores en todo el departamento del Caquetá,<br />garantizando calidad, confianza y acompañamiento en cada<br />entrega.</p>
           <div className="conocenos-intro-actions">
             <a className="conocenos-button" href="#contacto">Contactanos <span aria-hidden="true">→</span></a>
