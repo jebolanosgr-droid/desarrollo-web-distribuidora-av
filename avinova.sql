@@ -1,11 +1,3 @@
--- Distribuidora Avinova - esquema inicial para MySQL/InnoDB
--- Compatible con phpMyAdmin en InfinityFree.
--- La interfaz de referencia usa una identidad cálida amarillo/crema y una sección institucional
--- orientada a reservas, disponibilidad y entregas de pollitos bebés.
---
--- Importación: seleccione la base de datos creada en phpMyAdmin e importe este archivo.
--- No se incluye CREATE DATABASE porque InfinityFree normalmente no permite ejecutarlo.
--- Las contraseñas se almacenan únicamente como hashes bcrypt compatibles con password_verify().
 
 SET NAMES utf8mb4;
 SET CHARACTER SET utf8mb4;
