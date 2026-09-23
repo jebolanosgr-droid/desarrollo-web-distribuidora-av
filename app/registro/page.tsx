@@ -1,60 +1,6 @@
-'use client'
-
-import { FormEvent, useState } from 'react'
-import './registro.css'
-
-const icons = {
-  calendar: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/calen-bHI3Bqmn8NdH5bcPpZg4PWofbg4Aj4.png',
-  bell: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/bell-TbfRc9wXLfbQZYkERJw7krL8s4a6Sn.png',
-  user: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/persso-eDbKd5JccFdgtFwSsVwX4fLOI5LIdY.png',
-  mail: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/mail-WmjFifptFdtAPmkzW05FQEAMdYSCcs.png',
-  phone: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/tel-Oz1itVk3GA0QKL186l4JUwn8qUvrL9.png',
-  lock: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/canda-oSPXW4C7zrzt76yFVe0b6GbSFYPb6B.png',
-  eye: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/eye-3ZrDN4XpKXzzFSLtHu2OhPrgSHjVEt.png',
-  company: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/fabri-SZgsOngOPA4VY7eqnVOAaAtxnryeuK.png',
-  tag: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/tag-I4VZEep8UkWG1Bj7NhPwn0WArunwGz.png',
-}
-
-function Field({ id, label, type = 'text', icon, password, value, onChange }: { id: string; label: string; type?: string; icon: string; password?: boolean; value: string; onChange: (value: string) => void }) {
-  const [visible, setVisible] = useState(false)
-  return <label className="registro-field" htmlFor={id}>
-    <span className="sr-only">{label}</span>
-    <img src={icon} alt="" aria-hidden="true" />
-    <input id={id} name={id} type={password && visible ? 'text' : type} placeholder={label} value={value} onChange={(event) => onChange(event.target.value)} required />
-    {password && <button type="button" className="registro-eye" onClick={() => setVisible(!visible)} aria-label={visible ? 'Ocultar contraseña' : 'Mostrar contraseña'}><img src={icons.eye} alt="" aria-hidden="true" /></button>}
-  </label>
-}
+import Link from 'next/link'
+import { AuthForm } from '@/components/auth-form'
 
 export default function RegistroPage() {
-  const [values, setValues] = useState({ name: '', email: '', phone: '', password: '', confirmation: '', userType: 'cliente' })
-  const [submitted, setSubmitted] = useState(false)
-  const update = (key: keyof typeof values) => (value: string) => setValues((current) => ({ ...current, [key]: value }))
-  const submit = (event: FormEvent<HTMLFormElement>) => { event.preventDefault(); setSubmitted(true) }
-
-  return <div className="registro-page">
-    <main className="registro-main">
-      <section className="registro-card" aria-labelledby="registro-title">
-        <div className="registro-intro">
-          <img className="registro-placeholder" src="/assets/img/placeholders/login-placeholder.png" alt="Pollitos bebés en una granja avícola" />
-          <h1 id="registro-title">Únete a Avinova</h1>
-          <p>Regístrate y accede a nuestros servicios de reserva de pollitos de engorde. Es rápido, fácil y seguro.</p>
-          <div className="registro-benefits"><Benefit icon={icons.calendar} text="Gestiona tus reservas" /><Benefit icon={icons.bell} text="Recibe notificaciones" /><Benefit icon={icons.tag} text="Accede a promociones" /></div>
-        </div>
-        <form className="registro-form" onSubmit={submit} noValidate>
-          <h2>Crear cuenta</h2><p>Completa la información para registrarte.</p>
-          <Field id="name" label="Nombre completo" icon={icons.user} value={values.name} onChange={update('name')} />
-          <Field id="email" label="Correo electrónico" type="email" icon={icons.mail} value={values.email} onChange={update('email')} />
-          <Field id="phone" label="Teléfono" type="tel" icon={icons.phone} value={values.phone} onChange={update('phone')} />
-          <Field id="password" label="Contraseña" type="password" icon={icons.lock} password value={values.password} onChange={update('password')} />
-          <Field id="confirmation" label="Confirmar contraseña" type="password" icon={icons.lock} password value={values.confirmation} onChange={update('confirmation')} />
-          <fieldset className="registro-types"><legend>Tipo de usuario</legend><label className={values.userType === 'cliente' ? 'selected' : ''}><input type="radio" name="userType" value="cliente" checked={values.userType === 'cliente'} onChange={() => update('userType')('cliente')} /><img src={icons.user} alt="" /><span>Cliente <small>(productor / granjero)</small></span></label><label className={values.userType === 'empresa' ? 'selected' : ''}><input type="radio" name="userType" value="empresa" checked={values.userType === 'empresa'} onChange={() => update('userType')('empresa')} /><img src={icons.company} alt="" /><span>Empresa <small>/ negocio</small></span></label></fieldset>
-          {submitted && <p className="registro-notice" role="status">Formulario listo para conectar con el registro del servidor.</p>}
-          <button className="registro-primary" type="submit">Registrarse <span aria-hidden="true">→</span></button>
-          <div className="registro-already"><span>¿Ya tienes una cuenta?</span><a href="/login">Iniciar sesión <span aria-hidden="true">→</span></a></div>
-        </form>
-      </section>
-    </main>
-  </div>
+  return <main className="auth-page"><section className="auth-card"><p className="eyebrow">AVINOVA GROUP</p><h1>Crea tu cuenta</h1><p>Guarda tus datos y consulta tus reservas fácilmente.</p><AuthForm mode="register" /><Link href="/login">¿Ya tienes una cuenta? Inicia sesión</Link></section></main>
 }
-
-function Benefit({ icon, text }: { icon: string; text: string }) { return <div className="registro-benefit"><img src={icon} alt="" aria-hidden="true" /><span>{text}</span></div> }
