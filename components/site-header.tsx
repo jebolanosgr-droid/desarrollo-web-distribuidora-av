@@ -22,7 +22,7 @@ export function SiteHeader() {
         {!isAuthPage && <a href="/reserva">Reserva</a>}
         <a href="/#contacto">Contacto</a>
       </nav>
-      {!isAuthPage && <a className="button button-small" href="/login">Iniciar sesión</a>}
+      {!isAuthPage && <div className="header-actions"><a className="dashboard-header-link" href="/dashboard-access" aria-label="Abrir dashboard administrativo"><img src="/assets/img/icons/pollito.png" alt="" aria-hidden="true" /></a><a className="button button-small" href="/login">Iniciar sesión</a></div>}
     </header>
   )
 }
