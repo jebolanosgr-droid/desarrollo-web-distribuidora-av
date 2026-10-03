@@ -3,6 +3,7 @@
 import { useMemo, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import './reserva.css'
+import { OnboardingPage } from '@/components/onboarding/onboarding-page'
 
 const icons = {
   box: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/bo-C6sLGwCNfwl3hEVo97MQHMFeS1vowv.png',
@@ -63,7 +64,8 @@ export default function ReservaPage() {
 
   return (
     <main className="reserva-page">
-      <section className="reserva-hero" aria-labelledby="reserva-title">
+      <OnboardingPage tourId="reserva" />
+      <section className="reserva-hero" data-tour="reservation-intro" aria-labelledby="reserva-title">
         <img src="/assets/img/placeholders/pollitos-montana.png" alt="Pollitos bebés en un campo frente a las montañas" />
         <div><h1 id="reserva-title">Reserva de pollitos</h1><p>Selecciona la cantidad de cajas, el género y la semana para<br className="desktop-only" /> asegurar tus pollitos de engorde.</p></div>
       </section>

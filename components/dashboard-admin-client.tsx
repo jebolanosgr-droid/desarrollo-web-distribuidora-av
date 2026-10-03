@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from 'react'
 import type { reservations } from '@/lib/db/schema'
+import { OnboardingPage } from '@/components/onboarding/onboarding-page'
 
 type Reservation = typeof reservations.$inferSelect
 
@@ -60,7 +61,8 @@ export function DashboardAdminClient({ reservations: items }: DashboardAdminClie
 
   return (
     <main className="admin-dashboard">
-      <section className="admin-dashboard-hero" aria-labelledby="admin-dashboard-title">
+      <OnboardingPage tourId="dashboard" />
+      <section className="admin-dashboard-hero" data-tour="dashboard-intro" aria-labelledby="admin-dashboard-title">
         <div className="admin-dashboard-hero-copy">
           <h1 id="admin-dashboard-title">Administrador de reservas</h1>
           <p>Establece el tiempo y el número de cajas que se darán para reservar.</p>
