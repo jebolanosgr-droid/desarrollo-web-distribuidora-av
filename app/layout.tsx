@@ -19,8 +19,8 @@ export const metadata: Metadata = {
         media: '(prefers-color-scheme: dark)',
       },
       {
-        url: '/icon.svg',
-        type: 'image/svg+xml',
+        url: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Group%2084-WgQ7URtVzI9H87SSfd9gGPMxGAkZug.png',
+        type: 'image/png',
       },
     ],
     apple: '/apple-icon.png',

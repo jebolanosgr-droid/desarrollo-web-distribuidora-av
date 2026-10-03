@@ -5,8 +5,7 @@ const dashboardPassword = process.env.DASHBOARD_PASSWORD ?? 'AvinovaCorp2026_S'
 
 export async function POST(request: Request) {
   const body = await request.json().catch(() => null)
-  const previewAccess = body?.previewAccess === true
-  if (!previewAccess && (!body || typeof body.password !== 'string' || body.password !== body.confirmation || body.password !== dashboardPassword)) {
+  if (!body || typeof body.password !== 'string' || body.password !== body.confirmation || body.password !== dashboardPassword) {
     return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 })
   }
 
