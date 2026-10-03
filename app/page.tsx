@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { OnboardingPage } from '@/components/onboarding/onboarding-page'
+import { MotionObserver } from '@/components/motion/scroll-reveal'
 
 const heroSlides = [
   { image: '/assets/img/placeholders/pollitos-montana.png', alt: 'Pollitos bebés en un campo frente a las montañas' },
@@ -50,13 +51,14 @@ export default function Page() {
 
   return <main className="avinova-site">
     <OnboardingPage tourId="inicio" />
-    <section className="hero shell" id="inicio" data-tour="home-hero">
+    <MotionObserver />
+    <section className="hero shell motion-reveal is-visible" id="inicio" data-tour="home-hero">
       <div className="hero-copy"><h1>Pollitos bebés,<br />directo a tu negocio</h1><p>Conectamos granjas y clientes con pollitos de la mejor calidad, garantizando un proceso seguro, rápido y confiable.</p><div className="button-row"><a className="button" href="#servicios">Ver servicios <span aria-hidden="true">→</span></a><a className="button button-outline" href="#reserva">Hacer una reserva</a></div></div>
       <div className="hero-visual" tabIndex={0} aria-label="Carrusel de imágenes"><img src={heroSlides[slide].image} alt={heroSlides[slide].alt} /><div className="slider-controls"><button onClick={previous} aria-label="Imagen anterior">←</button>{heroSlides.map((item, index) => <button key={`${item.image}-${index}`} className={index === slide ? 'dot active' : 'dot'} onClick={() => setSlide(index)} aria-label={`Ver imagen ${index + 1}`} aria-current={index === slide ? 'true' : undefined}> </button>)}<button onClick={next} aria-label="Imagen siguiente">→</button></div></div>
       <div className="benefits">{benefits.map(([icon, title, text]) => <article key={title}><img src={`/assets/img/icons/${icon}`} alt="" aria-hidden="true" /><div><h3>{title}</h3><p>{text}</p></div></article>)}</div>
     </section>
 
-    <section className="services section" id="servicios" data-tour="home-services"><div className="section-intro"><h2>Soluciones para tu<br />granja y negocio</h2><p>Ofrecemos un servicio integral de distribución de pollitos bebés, con asesoría y acompañamiento en cada etapa.</p><a className="button" href="#contacto">Conocer más <span aria-hidden="true">→</span></a></div><div className="service-grid">{services.map(([icon, title, text, image]) => <article className="service-card" key={title}><img className="card-image" src={`/assets/img/placeholders/${image}`} alt={`Imagen de ${title}`} /><img className="card-icon" src={`/assets/img/icons/${icon}`} alt="" aria-hidden="true" /><h3>{title}</h3><p>{text}</p><a href="#reserva">Conocer más <span aria-hidden="true">→</span></a></article>)}</div></section>
+    <section className="services section motion-reveal" id="servicios" data-tour="home-services"><div className="section-intro"><h2>Soluciones para tu<br />granja y negocio</h2><p>Ofrecemos un servicio integral de distribución de pollitos bebés, con asesoría y acompañamiento en cada etapa.</p><a className="button" href="#contacto">Conocer más <span aria-hidden="true">→</span></a></div><div className="service-grid">{services.map(([icon, title, text, image]) => <article className="service-card" key={title}><img className="card-image" src={`/assets/img/placeholders/${image}`} alt={`Imagen de ${title}`} /><img className="card-icon" src={`/assets/img/icons/${icon}`} alt="" aria-hidden="true" /><h3>{title}</h3><p>{text}</p><a href="#reserva">Conocer más <span aria-hidden="true">→</span></a></article>)}</div></section>
 
     <section className="trust shell-dark" id="nosotros"><img className="trust-art" src="/assets/img/placeholders/pollitos-montana.png" alt="Pollitos bebés en un campo frente a las montañas" /><div className="trust-content"><h2>Tu aliado en cada etapa</h2><p>Brindamos confianza, calidad y respaldo en la distribución de pollitos bebés, con un equipo experto y un servicio cercano.</p><div className="trust-points">{trustPoints.map(([icon, text]) => <div key={text}><img src={icon} alt="" aria-hidden="true" /><span>{text}</span></div>)}</div></div></section>
 

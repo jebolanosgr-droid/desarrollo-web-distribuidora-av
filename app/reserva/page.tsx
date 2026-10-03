@@ -4,6 +4,7 @@ import { useMemo, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import './reserva.css'
 import { OnboardingPage } from '@/components/onboarding/onboarding-page'
+import { MotionObserver } from '@/components/motion/scroll-reveal'
 
 const icons = {
   box: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/bo-C6sLGwCNfwl3hEVo97MQHMFeS1vowv.png',
@@ -65,12 +66,13 @@ export default function ReservaPage() {
   return (
     <main className="reserva-page">
       <OnboardingPage tourId="reserva" />
-      <section className="reserva-hero" data-tour="reservation-intro" aria-labelledby="reserva-title">
+      <MotionObserver />
+      <section className="reserva-hero motion-reveal is-visible" data-tour="reservation-intro" aria-labelledby="reserva-title">
         <img src="/assets/img/placeholders/pollitos-montana.png" alt="Pollitos bebés en un campo frente a las montañas" />
         <div><h1 id="reserva-title">Reserva de pollitos</h1><p>Selecciona la cantidad de cajas, el género y la semana para<br className="desktop-only" /> asegurar tus pollitos de engorde.</p></div>
       </section>
 
-      <section className="reserva-card">
+      <section className="reserva-card motion-reveal is-visible">
         <div className="reserva-features" data-tour="reservation-features">
           <article><Icon src={icons.box} alt="" /><h2>Caja estándar</h2><p>100 pollitos aprox.</p></article>
           <article><Icon src={icons.calendar} alt="" /><h2>Reserva semanal</h2><p>Se habilita cada<br />inicio de semana.</p></article>
