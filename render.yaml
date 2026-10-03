@@ -1,12 +1,9 @@
 services:
   - type: web
-    name: avinova-web
+    name: avinova
     runtime: node
-    plan: free
     buildCommand: corepack enable && pnpm install --frozen-lockfile && pnpm build
     startCommand: pnpm start
-    autoDeploy: true
-    healthCheckPath: /
     envVars:
       - key: NODE_ENV
         value: production
