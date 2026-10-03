@@ -49,6 +49,11 @@ export default function Page() {
   })
 
   return <main className="avinova-site">
+    <header className="site-header">
+      <a className="brand" href="#inicio" aria-label="Avinova, ir al inicio"><strong>AVINOVA</strong></a>
+      <nav className="nav" aria-label="Navegación principal"><a href="#servicios">Servicios</a><a href="#nosotros">Nosotros</a><a href="#contacto">Contacto</a></nav>
+      <a className="button" href="#reserva">Hacer una reserva</a>
+    </header>
     <OnboardingPage tourId="inicio" />
     <section className="hero shell" id="inicio" data-tour="home-hero">
       <div className="hero-copy"><h1>Pollitos bebés,<br />directo a tu negocio</h1><p>Conectamos granjas y clientes con pollitos de la mejor calidad, garantizando un proceso seguro, rápido y confiable.</p><div className="button-row"><a className="button" href="#servicios">Ver servicios <span aria-hidden="true">→</span></a><a className="button button-outline" href="#reserva">Hacer una reserva</a></div></div>

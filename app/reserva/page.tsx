@@ -64,6 +64,11 @@ export default function ReservaPage() {
 
   return (
     <main className="reserva-page">
+      <header className="reserva-header">
+        <a className="reserva-brand" href="/" aria-label="Avinova, ir al inicio"><strong>AVINOVA</strong></a>
+        <nav aria-label="Navegación principal"><a href="/#servicios">Servicios</a><a href="/#nosotros">Nosotros</a><a className="active" href="/reserva">Reserva</a><a href="/#contacto">Contacto</a></nav>
+        <a className="reserva-login" href="/login">Iniciar sesión</a>
+      </header>
       <OnboardingPage tourId="reserva" />
       <section className="reserva-hero" data-tour="reservation-intro" aria-labelledby="reserva-title">
         <img src="/assets/img/placeholders/pollitos-montana.png" alt="Pollitos bebés en un campo frente a las montañas" />
@@ -71,7 +76,7 @@ export default function ReservaPage() {
       </section>
 
       <section className="reserva-card">
-        <div className="reserva-features">
+        <div className="reserva-features" data-tour="reservation-features">
           <article><Icon src={icons.box} alt="" /><h2>Caja estándar</h2><p>100 pollitos aprox.</p></article>
           <article><Icon src={icons.calendar} alt="" /><h2>Reserva semanal</h2><p>Se habilita cada<br />inicio de semana.</p></article>
           <article><Icon src={icons.people} alt="" /><h2>Capacidad semanal</h2><p>80 - 100 personas.</p></article>

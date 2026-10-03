@@ -25,7 +25,8 @@ export const tourSteps: Record<string, OnboardingStep[]> = {
   ],
   reserva: [
     { target: 'reservation-intro', title: 'Reserva tus pollitos', description: 'Solicita cajas de pollitos para una semana disponible y revisa todos los datos antes de confirmar.' },
-    { target: 'reservation-availability', title: 'Consulta la disponibilidad', description: 'Aquí verás las cajas totales, reservadas y disponibles.' },
+    { target: 'reservation-features', title: 'Conoce las condiciones', description: 'Aquí encuentras el tamaño de la caja, la frecuencia de reserva, la capacidad semanal y el tipo de pollito disponible.' },
+    { target: 'reservation-availability', title: 'Consulta la disponibilidad', description: 'Aquí verás las cajas totales, reservadas y disponibles. Cambia de semana para comparar las opciones.' },
     { target: 'reservation-week', title: 'Selecciona una semana', description: 'Elige la semana habilitada en la que deseas recibir tu pedido.' },
     { target: 'reservation-gender', title: 'Elige el género', description: 'Selecciona Machos o Hembras según la disponibilidad.' },
     { target: 'reservation-quantity', title: 'Indica cuántas cajas necesitas', description: 'Usa los botones más y menos. Cada caja representa aproximadamente 100 pollitos.' },
