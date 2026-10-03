@@ -81,7 +81,7 @@ export default function ReservaPage() {
         </div>
 
         <div className="reserva-layout">
-          <section className="reserva-form" aria-label="Formulario de reserva">
+          <section className="reserva-form motion-reveal" aria-label="Formulario de reserva">
             <div className="reserva-availability-heading"><h2>Disponibilidad de cajas</h2><label>Semana <select value={weekValue} onChange={(event) => changeWeek(event.target.value)}>{weeks.map((item) => <option key={item.value} value={item.value}>{item.label}</option>)}</select></label></div>
             <div className="reserva-stats"><div><span>Total de cajas</span><strong>{week.total}</strong></div><div><span>Reservadas</span><strong>{week.reserved}</strong></div><div><span>Disponibles</span><strong>{available}</strong></div></div>
 
@@ -96,7 +96,7 @@ export default function ReservaPage() {
             <button className="reserva-submit" type="button" disabled={!canSubmit} onClick={submitReservation}><span>Confirmar reserva</span><Icon src={icons.calendar} alt="" /></button>
           </section>
 
-          <aside className="reserva-summary"><h2><Icon src={icons.calendar} alt="" />Disponibilidad de cajas</h2><dl><div><dt>Semana</dt><dd>{weekText}</dd></div><div><dt>Cantidad de cajas:</dt><dd>{clampedQuantity}</dd></div><div><dt>Género:</dt><dd>{gender}</dd></div><div><dt>Total de pollitos (aprox.):</dt><dd>{totalChicks}</dd></div></dl><p className="reserva-notice"><Icon src={icons.door} alt="" />Tu reserva será confirmada vía correo electrónico y/o WhatsApp en un plazo de 24 horas.</p></aside>
+          <aside className="reserva-summary motion-reveal"><h2><Icon src={icons.calendar} alt="" />Disponibilidad de cajas</h2><dl><div><dt>Semana</dt><dd>{weekText}</dd></div><div><dt>Cantidad de cajas:</dt><dd>{clampedQuantity}</dd></div><div><dt>Género:</dt><dd>{gender}</dd></div><div><dt>Total de pollitos (aprox.):</dt><dd>{totalChicks}</dd></div></dl><p className="reserva-notice"><Icon src={icons.door} alt="" />Tu reserva será confirmada vía correo electrónico y/o WhatsApp en un plazo de 24 horas.</p></aside>
         </div>
 
         <section className="reserva-help"><Icon src={icons.chick} alt="" /><div><h2>¿Tienes dudas?</h2><p>Si necesitas más información sobre nuestras reservas, contáctanos. Estamos para ayudarte.</p></div><div className="reserva-socials"><a href="https://facebook.com" aria-label="Facebook"><Icon src={icons.facebook} /></a><a href="https://wa.me/573205135667" aria-label="WhatsApp"><Icon src={icons.whatsapp} /></a><a href="https://instagram.com" aria-label="Instagram"><Icon src={icons.instagram} /></a></div></section>
