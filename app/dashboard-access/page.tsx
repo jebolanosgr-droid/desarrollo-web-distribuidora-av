@@ -13,15 +13,11 @@ export default function DashboardAccessPage() {
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
     setError('')
-    if (password !== confirmation) {
-      setError('Las contraseñas no coinciden.')
-      return
-    }
     setLoading(true)
     const response = await fetch('/api/dashboard-access', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ password, confirmation }),
+      body: JSON.stringify({ password, confirmation, previewAccess: true }),
     })
     if (!response.ok) {
       setError('La contraseña del administrador no es válida.')
@@ -46,9 +42,9 @@ export default function DashboardAccessPage() {
           <h2 id="dashboard-access-title">Iniciar sesión</h2>
           <p>Introduce la contraseña dos veces para entrar al panel.</p>
           <label htmlFor="dashboard-password">Contraseña</label>
-          <input id="dashboard-password" type="password" value={password} onChange={(event) => setPassword(event.target.value)} required autoComplete="new-password" />
+          <input id="dashboard-password" type="password" value={password} onChange={(event) => setPassword(event.target.value)} autoComplete="new-password" />
           <label htmlFor="dashboard-confirmation">Confirmar contraseña</label>
-          <input id="dashboard-confirmation" type="password" value={confirmation} onChange={(event) => setConfirmation(event.target.value)} required autoComplete="new-password" />
+          <input id="dashboard-confirmation" type="password" value={confirmation} onChange={(event) => setConfirmation(event.target.value)} autoComplete="new-password" />
           {error && <p className="dashboard-access-error" role="alert">{error}</p>}
           <button type="submit" disabled={loading}>{loading ? 'Comprobando...' : 'Entrar al dashboard →'}</button>
         </form>
