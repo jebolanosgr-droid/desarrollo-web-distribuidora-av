@@ -64,11 +64,6 @@ export default function ReservaPage() {
 
   return (
     <main className="reserva-page">
-      <header className="reserva-header">
-        <a className="reserva-brand" href="/" aria-label="Avinova, ir al inicio"><strong>AVINOVA</strong></a>
-        <nav aria-label="Navegación principal"><a href="/#servicios">Servicios</a><a href="/#nosotros">Nosotros</a><a className="active" href="/reserva">Reserva</a><a href="/#contacto">Contacto</a></nav>
-        <a className="reserva-login" href="/login">Iniciar sesión</a>
-      </header>
       <OnboardingPage tourId="reserva" />
       <section className="reserva-hero" data-tour="reservation-intro" aria-labelledby="reserva-title">
         <img src="/assets/img/placeholders/pollitos-montana.png" alt="Pollitos bebés en un campo frente a las montañas" />
