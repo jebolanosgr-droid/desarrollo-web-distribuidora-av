@@ -1,14 +1,13 @@
-import { headers } from 'next/headers'
+import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
-import { desc, eq } from 'drizzle-orm'
-import { auth } from '@/lib/auth'
+import { desc } from 'drizzle-orm'
 import { db } from '@/lib/db'
 import { reservations } from '@/lib/db/schema'
-import { DashboardClient } from '@/components/dashboard-client'
+import { DashboardAdminClient } from '@/components/dashboard-admin-client'
 
 export default async function DashboardPage() {
-  const session = await auth.api.getSession({ headers: await headers() })
-  if (!session?.user) redirect('/login')
-  const items = await db.select().from(reservations).where(eq(reservations.userId, session.user.id)).orderBy(desc(reservations.createdAt))
-  return <DashboardClient user={session.user} reservations={items} />
+  const cookieStore = await cookies()
+  if (cookieStore.get('avinova-dashboard-access')?.value !== 'granted') redirect('/dashboard-access')
+  const items = await db.select().from(reservations).orderBy(desc(reservations.createdAt))
+  return <DashboardAdminClient reservations={items} />
 }
