@@ -36,7 +36,7 @@ export default function ConocenosPage() {
           <h2>Conoce Avinova Group</h2>
           <p>Conectamos granjas y clientes con pollitos de la mejor calidad,<br />garantizando un proceso seguro, rápido y confiable.<br />Desde Ibagué llevamos genética de excelencia a productores<br />y distribuidores en todo el departamento del Caquetá,<br />garantizando calidad, confianza y acompañamiento en cada<br />entrega.</p>
           <div className="conocenos-intro-actions">
-            <a className="conocenos-button" href="#contacto">Contactanos <span aria-hidden="true">→</span></a>
+            <a className="conocenos-button" href="/#contacto">Contáctanos <span aria-hidden="true">→</span></a>
             <a className="conocenos-button conocenos-button-outline" href="#cobertura">Ver cobertura <img src="/assets/img/ubicacion.png" alt="" aria-hidden="true" /></a>
           </div>
         </div>
@@ -66,7 +66,7 @@ export default function ConocenosPage() {
         </div>
       </section>
 
-      <section className="conocenos-card conocenos-coverage"><div><span className="conocenos-kicker">NUESTRA COBERTURA</span><h2>Llegamos a más lugares para impulsar el crecimiento avícola</h2><p>Realizamos distribución en diferentes municipios del Huila y Caquetá, acercando productos confiables a productores, tiendas avícolas y negocios de la región.</p><div className="conocenos-regions"><span><img src="/assets/img/icons/home.png" alt="" aria-hidden="true" />Huila</span><span><img src="/assets/img/icons/home.png" alt="" aria-hidden="true" />Caquetá</span></div></div><div className="conocenos-coverage-art"><img src="/assets/img/conocenos-hero.png" alt="Paisaje de la región de cobertura de Avinova" loading="lazy" /></div></section>
+      <section id="cobertura" className="conocenos-card conocenos-coverage"><div><span className="conocenos-kicker">NUESTRA COBERTURA</span><h2>Llegamos a más lugares para impulsar el crecimiento avícola</h2><p>Realizamos distribución en diferentes municipios del Huila y Caquetá, acercando productos confiables a productores, tiendas avícolas y negocios de la región.</p><div className="conocenos-regions"><span><img src="/assets/img/icons/home.png" alt="" aria-hidden="true" />Huila</span><span><img src="/assets/img/icons/home.png" alt="" aria-hidden="true" />Caquetá</span></div></div><div className="conocenos-coverage-art"><img src="/assets/img/conocenos-hero.png" alt="Paisaje de la región de cobertura de Avinova" loading="lazy" /></div></section>
 
       <section className="conocenos-proposal"><div className="conocenos-proposal-image"><img src="/assets/img/conocenos-propuesta-ref.png" alt="Trabajador de Avinova Group llevando una caja de pollitos" loading="lazy" /></div><div className="conocenos-proposal-content"><h2>Llevando genética de excelencia<br />al Caquetá</h2><p>Trabajamos para que cada cliente reciba productos confiables, con logística organizada y atención cercana</p><div className="conocenos-benefits">{benefits.map(([icon, title]) => <div key={title}><img src={`/assets/img/icons/${icon}.png`} alt="" aria-hidden="true" /><strong>{title}</strong></div>)}</div></div></section>
 
