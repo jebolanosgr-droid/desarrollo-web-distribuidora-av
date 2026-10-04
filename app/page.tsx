@@ -18,9 +18,9 @@ const benefits = [
   ['people.png', 'Atención personalizada', 'Te acompañamos en todo el proceso de compra.'],
 ]
 const services = [
-  ['pollito-yellow.png', 'Reserva de pollitos', 'Solicita tus pollitos de forma rápida y segura, según tus necesidades.', 'servicio-reserva.jpg'],
-  ['box.png', 'Distribución segura', 'Coordinamos cada entrega para que recibas tu pedido a tiempo.', 'servicio-distribucion.jpg'],
-  ['search.png', 'Asesoría personalizada', 'Encuentra la mejor alternativa para crecer con confianza.', 'servicio-asesoria.jpg'],
+  ['pollito-yellow.png', 'Reserva de pollitos', 'Solicita tus pollitos de forma rápida y segura, según tus necesidades.', 'hero-1.jpg'],
+  ['box.png', 'Distribución segura', 'Coordinamos cada entrega para que recibas tu pedido a tiempo.', 'conocenos-propuesta-ref.png'],
+  ['search.png', 'Asesoría personalizada', 'Encuentra la mejor alternativa para crecer con confianza.', 'pollitos-montana.png'],
 ]
 const trustPoints = [
   ['https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Escudo%20blanco-Kikm5Ky4Xr8h3VXxCCMZVs0VEK8dIO.png', 'Calidad garantizada'],
