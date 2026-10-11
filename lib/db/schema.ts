@@ -1,4 +1,4 @@
-import { boolean, date, integer, pgTable, serial, text, timestamp } from 'drizzle-orm/pg-core'
+import { boolean, date, index, integer, pgTable, serial, text, timestamp } from 'drizzle-orm/pg-core'
 
 export const user = pgTable('user', {
   id: text('id').primaryKey(), name: text('name').notNull(), email: text('email').notNull().unique(), emailVerified: boolean('emailVerified').notNull().default(false), image: text('image'), createdAt: timestamp('createdAt').notNull().defaultNow(), updatedAt: timestamp('updatedAt').notNull().defaultNow(),
@@ -13,5 +13,5 @@ export const verification = pgTable('verification', {
   id: text('id').primaryKey(), identifier: text('identifier').notNull(), value: text('value').notNull(), expiresAt: timestamp('expiresAt').notNull(), createdAt: timestamp('createdAt'), updatedAt: timestamp('updatedAt'),
 })
 export const reservations = pgTable('reservations', {
-  id: serial('id').primaryKey(), userId: text('userId').notNull(), customerName: text('customerName').notNull(), phone: text('phone').notNull(), email: text('email').notNull(), deliveryDate: date('deliveryDate').notNull(), quantity: integer('quantity').notNull(), status: text('status').notNull().default('pending'), notes: text('notes'), createdAt: timestamp('createdAt').notNull().defaultNow(), updatedAt: timestamp('updatedAt').notNull().defaultNow(),
-})
+  id: serial('id').primaryKey(), userId: text('userId').notNull().references(() => user.id, { onDelete: 'cascade' }), customerName: text('customerName').notNull(), phone: text('phone').notNull(), email: text('email').notNull(), deliveryDate: date('deliveryDate').notNull(), quantity: integer('quantity').notNull(), status: text('status').notNull().default('pending'), notes: text('notes'), createdAt: timestamp('createdAt').notNull().defaultNow(), updatedAt: timestamp('updatedAt').notNull().defaultNow(),
+}, (table) => [index('reservations_user_id_idx').on(table.userId)])
