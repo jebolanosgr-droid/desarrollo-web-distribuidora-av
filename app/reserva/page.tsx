@@ -38,6 +38,10 @@ export default function ReservaPage() {
   const [phone, setPhone] = useState('')
   const [email, setEmail] = useState('')
   const [deliveryDate, setDeliveryDate] = useState('')
+  const [department, setDepartment] = useState('')
+  const [city, setCity] = useState('')
+  const [address, setAddress] = useState('')
+  const [postalCode, setPostalCode] = useState('')
   const [error, setError] = useState('')
   const router = useRouter()
   const week = weeks.find((item) => item.value === weekValue) ?? weeks[0]
@@ -57,7 +61,7 @@ export default function ReservaPage() {
   const submitReservation = async () => {
     setError('')
     if (!customerName || !phone || !email || !deliveryDate) { setError('Completa nombre, teléfono, correo y fecha de entrega.'); return }
-    const response = await fetch('/api/reservas', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ customerName, phone, email, deliveryDate, quantity: clampedQuantity, notes: comments }) })
+    const response = await fetch('/api/reservas', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ customerName, phone, email, deliveryDate, quantity: clampedQuantity, gender, department, city, address, postalCode, notes: comments }) })
     if (response.status === 401) { router.push('/login?returnTo=/reserva'); return }
     if (!response.ok) { setError('No pudimos guardar la reserva. Revisa los datos e inténtalo nuevamente.'); return }
     router.push('/dashboard')
@@ -89,14 +93,14 @@ export default function ReservaPage() {
 
             <fieldset className="reserva-fieldset"><legend>Selecciona el género</legend><div className="reserva-genders"><label className={gender === 'Machos' ? 'selected' : ''}><input type="radio" name="genero" value="Machos" checked={gender === 'Machos'} onChange={() => setGender('Machos')} /><Icon src={icons.male} alt="" /><span><strong>Machos</strong><small>Disponible: {week.males} cajas</small></span></label><label className={gender === 'Hembras' ? 'selected' : ''}><input type="radio" name="genero" value="Hembras" checked={gender === 'Hembras'} onChange={() => setGender('Hembras')} /><Icon src={icons.female} alt="" /><span><strong>Hembras</strong><small>Disponible: {week.females} cajas</small></span></label></div></fieldset>
 
-            <fieldset className="reserva-fieldset"><legend>Dirección de Entrega</legend><div className="reserva-delivery"><div className="reserva-inputs"><label><span className="sr-only">Nombre completo</span><input required value={customerName} onChange={(event) => setCustomerName(event.target.value)} placeholder="Nombre completo" /></label><label><span className="sr-only">Teléfono</span><input required value={phone} onChange={(event) => setPhone(event.target.value)} placeholder="Teléfono" /></label><label><span className="sr-only">Correo electrónico</span><input required type="email" value={email} onChange={(event) => setEmail(event.target.value)} placeholder="Correo electrónico" /></label><label><span className="sr-only">Fecha de entrega</span><input required type="date" value={deliveryDate} onChange={(event) => setDeliveryDate(event.target.value)} /></label></div><button type="button" className="reserva-map"><Icon src={icons.location} alt="" /><strong>Ubicar dirección<br />en el mapa</strong></button></div></fieldset>
+            <fieldset className="reserva-fieldset"><legend>Dirección de Entrega</legend><div className="reserva-inputs"><label><span className="sr-only">Nombre completo</span><input required value={customerName} onChange={(event) => setCustomerName(event.target.value)} placeholder="Nombre completo" /></label><label><span className="sr-only">Teléfono</span><input required value={phone} onChange={(event) => setPhone(event.target.value)} placeholder="Teléfono" /></label><label><span className="sr-only">Correo electrónico</span><input required type="email" value={email} onChange={(event) => setEmail(event.target.value)} placeholder="Correo electrónico" /></label><label><span className="sr-only">Fecha de entrega</span><input required type="date" value={deliveryDate} onChange={(event) => setDeliveryDate(event.target.value)} /></label><label><span className="sr-only">Departamento</span><input value={department} onChange={(event) => setDepartment(event.target.value)} placeholder="Departamento" /></label><label><span className="sr-only">Ciudad</span><input value={city} onChange={(event) => setCity(event.target.value)} placeholder="Ciudad" /></label><label><span className="sr-only">Dirección</span><input value={address} onChange={(event) => setAddress(event.target.value)} placeholder="Dirección" /></label><label><span className="sr-only">Código postal</span><input value={postalCode} onChange={(event) => setPostalCode(event.target.value)} placeholder="Código postal" /></label></div></fieldset>
 
             <label className="reserva-comments">Comentarios adicionales <span>(opcional)</span><textarea maxLength={200} value={comments} onChange={(event) => setComments(event.target.value)} placeholder="Escribe algún comentario especial sobre tu reserva..." /><small>{comments.length}/200</small></label>
             {error && <p className="reserva-error" role="alert">{error}</p>}
             <button className="reserva-submit" type="button" disabled={!canSubmit} onClick={submitReservation}><span>Confirmar reserva</span><Icon src={icons.calendar} alt="" /></button>
           </section>
 
-          <aside className="reserva-summary motion-reveal"><h2><Icon src={icons.calendar} alt="" />Disponibilidad de cajas</h2><dl><div><dt>Semana</dt><dd>{weekText}</dd></div><div><dt>Cantidad de cajas:</dt><dd>{clampedQuantity}</dd></div><div><dt>Género:</dt><dd>{gender}</dd></div><div><dt>Total de pollitos (aprox.):</dt><dd>{totalChicks}</dd></div></dl><p className="reserva-notice"><Icon src={icons.door} alt="" />Tu reserva será confirmada vía correo electrónico y/o WhatsApp en un plazo de 24 horas.</p></aside>
+          <aside className="reserva-summary motion-reveal"><h2><Icon src={icons.calendar} alt="" />Información de tu pedido</h2><dl><div><dt>Semana</dt><dd>{weekText}</dd></div><div><dt>Cantidad de cajas:</dt><dd>{clampedQuantity}</dd></div><div><dt>Género:</dt><dd>{gender}</dd></div><div><dt>Total de pollitos (aprox.):</dt><dd>{totalChicks}</dd></div></dl><p className="reserva-notice"><Icon src={icons.door} alt="" />Tu reserva será confirmada vía correo electrónico y/o WhatsApp en un plazo de 24 horas.</p></aside>
         </div>
 
         <section className="reserva-help"><Icon src={icons.chick} alt="" /><div><h2>¿Tienes dudas?</h2><p>Si necesitas más información sobre nuestras reservas, contáctanos. Estamos para ayudarte.</p></div><div className="reserva-socials"><a href="https://facebook.com" aria-label="Facebook"><Icon src={icons.facebook} /></a><a href="https://wa.me/573205135667" aria-label="WhatsApp"><Icon src={icons.whatsapp} /></a><a href="https://instagram.com" aria-label="Instagram"><Icon src={icons.instagram} /></a></div></section>

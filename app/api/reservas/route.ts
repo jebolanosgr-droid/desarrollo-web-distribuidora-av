@@ -10,6 +10,6 @@ export async function POST(request: Request) {
   const body = await request.json()
   const quantity = Number(body.quantity)
   if (!body.customerName || !body.phone || !body.email || !body.deliveryDate || !Number.isInteger(quantity) || quantity < 1 || quantity > 100) return NextResponse.json({ error: 'Datos inválidos' }, { status: 400 })
-  const [reservation] = await db.insert(reservations).values({ userId: session.user.id, customerName: String(body.customerName).trim(), phone: String(body.phone).trim(), email: String(body.email).trim(), deliveryDate: String(body.deliveryDate), quantity, notes: body.notes ? String(body.notes).slice(0, 200) : null }).returning({ id: reservations.id })
+  const [reservation] = await db.insert(reservations).values({ userId: session.user.id, customerName: String(body.customerName).trim(), phone: String(body.phone).trim(), email: String(body.email).trim(), deliveryDate: String(body.deliveryDate), quantity, gender: body.gender === 'Hembras' ? 'Hembras' : 'Machos', department: body.department ? String(body.department).trim() : null, city: body.city ? String(body.city).trim() : null, address: body.address ? String(body.address).trim() : null, postalCode: body.postalCode ? String(body.postalCode).trim() : null, recipientName: body.recipientName ? String(body.recipientName).trim() : null, recipientPhone: body.recipientPhone ? String(body.recipientPhone).trim() : null, notes: body.notes ? String(body.notes).slice(0, 200) : null }).returning({ id: reservations.id })
   return NextResponse.json({ reservation }, { status: 201 })
 }

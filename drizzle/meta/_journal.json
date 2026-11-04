@@ -8,6 +8,13 @@
       "when": 1791746242967,
       "tag": "0000_puzzling_tombstone",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1793827201858,
+      "tag": "0001_little_harpoon",
+      "breakpoints": true
     }
   ]
 }
