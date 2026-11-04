@@ -16,7 +16,9 @@ export function AuthForm({ mode }: { mode: 'login' | 'register' }) {
       : await authClient.signUp.email({ name: String(data.get('name')), email: String(data.get('email')), password: String(data.get('password')) })
     setPending(false)
     if (result.error) { setError('No pudimos completar la solicitud. Revisa tus datos e inténtalo nuevamente.'); return }
-    router.push('/dashboard'); router.refresh()
+    const returnTo = typeof window !== 'undefined' ? new URLSearchParams(window.location.search).get('returnTo') : null
+    const safeReturnTo = returnTo?.startsWith('/') && !returnTo.startsWith('//') ? returnTo : '/dashboard'
+    router.push(safeReturnTo); router.refresh()
   }
   return <form className="auth-form" onSubmit={submit}>
     {mode === 'register' && <label>Nombre<input name="name" required autoComplete="name" /></label>}
