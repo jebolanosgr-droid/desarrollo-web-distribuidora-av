@@ -1,6 +1,8 @@
 'use client'
 
 import { FormEvent, useState, type ReactNode } from 'react'
+import { useRouter } from 'next/navigation'
+import { authClient } from '@/lib/auth-client'
 import './login.css'
 import { OnboardingPage } from '@/components/onboarding/onboarding-page'
 
@@ -24,9 +26,24 @@ export default function LoginPage() {
   const [password, setPassword] = useState('')
   const [remember, setRemember] = useState(false)
   const [submitted, setSubmitted] = useState(false)
-  const submit = (event: FormEvent<HTMLFormElement>) => { event.preventDefault(); setSubmitted(true) }
+  const [error, setError] = useState('')
+  const [pending, setPending] = useState(false)
+  const router = useRouter()
+  const submit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    setSubmitted(false)
+    setError('')
+    setPending(true)
+    const result = await authClient.signIn.email({ email, password, rememberMe: remember })
+    setPending(false)
+    if (result.error) { setError('Correo o contraseña incorrectos.'); return }
+    const returnTo = new URLSearchParams(window.location.search).get('returnTo')
+    const safeReturnTo = returnTo?.startsWith('/') && !returnTo.startsWith('//') ? returnTo : '/'
+    router.push(safeReturnTo)
+    router.refresh()
+  }
 
-  return <div className="login-page"><header className="login-header"><a href="/" className="login-logo" aria-label="Avinova, inicio"><img src="/assets/img/logo/logo-avinova.png" alt="Avinova" /></a><nav className="login-nav" aria-label="Navegación principal"><a href="/">Inicio</a><a href="/#conocenos">Conócenos</a><a href="/#reserva">Reserva</a><a href="/#contacto">Contacto</a></nav><div className="login-actions"><a className="login-session-link" href="/login">Iniciar sesión</a></div></header><main className="login-main"><OnboardingPage tourId="login" /><section className="login-card" data-tour="login-form" aria-labelledby="login-title"><div className="login-intro"><img className="login-placeholder" src="/assets/img/placeholders/login-placeholder.png" alt="Pollitos bebés en una granja avícola" /><h1>Tu negocio,<br />nuestro compromiso</h1><p>Accede a tu cuenta para gestionar<br className="login-desktop-break" /> tus reservas de pollitos de engorde<br className="login-desktop-break" /> de forma rápida y segura.</p><div className="login-benefits"><Benefit icon={icons.shield} text={<>Reservas<br />seguras</>} /><Benefit icon={icons.delivery} text={<>Información en<br />tiempo real</>} /><Benefit icon={icons.support} text={<>Soporte<br />dedicado</>} /></div></div><form className="login-form" onSubmit={submit} noValidate><h2 id="login-title">Iniciar sesión</h2><p>Ingresa tus datos para continuar.</p><LoginField id="email" label="Correo electrónico" icon={icons.mail} type="email" value={email} onChange={setEmail} /><LoginField id="password" label="Contraseña" icon={icons.lock} type="password" value={password} onChange={setPassword} /><div className="login-options"><label><input type="checkbox" checked={remember} onChange={(event) => setRemember(event.target.checked)} /> <span>Recordar mi cuenta</span></label><a href="/recuperar-contrasena">¿Olvidaste tu contraseña?</a></div>{submitted && <p className="login-notice" role="status">Completa los datos para continuar.</p>}<button className="login-primary" type="submit">Iniciar sesión <span aria-hidden="true">→</span></button><div className="login-register"><span>¿No tienes una cuenta?</span><a href="/registro">Registrate <span aria-hidden="true">→</span></a></div></form></section></main><footer className="login-footer"><div className="login-footer-inner"><img src="/assets/img/logo/logo-avinova.png" alt="Avinova" /><nav aria-label="Enlaces del pie de página"><a href="/">Inicio</a><a href="/#conocenos">Conócenos</a><a href="/#reserva">Servicios</a><a href="/#contacto">Consultorías</a><a href="/#investigacion">Investigación</a></nav><div className="login-socials" aria-label="Redes sociales"><span>f</span><span>◉</span><span>◎</span></div></div><div className="login-divider" /></footer></div>
+  return <div className="login-page"><header className="login-header"><a href="/" className="login-logo" aria-label="Avinova, inicio"><img src="/assets/img/logo/logo-avinova.png" alt="Avinova" /></a><nav className="login-nav" aria-label="Navegación principal"><a href="/">Inicio</a><a href="/#conocenos">Conócenos</a><a href="/#reserva">Reserva</a><a href="/#contacto">Contacto</a></nav><div className="login-actions"><a className="login-session-link" href="/login">Iniciar sesión</a></div></header><main className="login-main"><OnboardingPage tourId="login" /><section className="login-card" data-tour="login-form" aria-labelledby="login-title"><div className="login-intro"><img className="login-placeholder" src="/assets/img/placeholders/login-placeholder.png" alt="Pollitos bebés en una granja avícola" /><h1>Tu negocio,<br />nuestro compromiso</h1><p>Accede a tu cuenta para gestionar<br className="login-desktop-break" /> tus reservas de pollitos de engorde<br className="login-desktop-break" /> de forma rápida y segura.</p><div className="login-benefits"><Benefit icon={icons.shield} text={<>Reservas<br />seguras</>} /><Benefit icon={icons.delivery} text={<>Información en<br />tiempo real</>} /><Benefit icon={icons.support} text={<>Soporte<br />dedicado</>} /></div></div><form className="login-form" onSubmit={submit} noValidate><h2 id="login-title">Iniciar sesión</h2><p>Ingresa tus datos para continuar.</p><LoginField id="email" label="Correo electrónico" icon={icons.mail} type="email" value={email} onChange={setEmail} /><LoginField id="password" label="Contraseña" icon={icons.lock} type="password" value={password} onChange={setPassword} /><div className="login-options"><label><input type="checkbox" checked={remember} onChange={(event) => setRemember(event.target.checked)} /> <span>Recordar mi cuenta</span></label><a href="/recuperar-contrasena">¿Olvidaste tu contraseña?</a></div>{error && <p className="login-notice" role="alert">{error}</p>}{submitted && <p className="login-notice" role="status">Sesión iniciada correctamente.</p>}<button className="login-primary" type="submit">Iniciar sesión <span aria-hidden="true">→</span></button><div className="login-register"><span>¿No tienes una cuenta?</span><a href="/registro">Registrate <span aria-hidden="true">→</span></a></div></form></section></main><footer className="login-footer"><div className="login-footer-inner"><img src="/assets/img/logo/logo-avinova.png" alt="Avinova" /><nav aria-label="Enlaces del pie de página"><a href="/">Inicio</a><a href="/#conocenos">Conócenos</a><a href="/#reserva">Servicios</a><a href="/#contacto">Consultorías</a><a href="/#investigacion">Investigación</a></nav><div className="login-socials" aria-label="Redes sociales"><span>f</span><span>◉</span><span>◎</span></div></div><div className="login-divider" /></footer></div>
 }
 
 function Benefit({ icon, text }: { icon: string; text: ReactNode }) { return <div className="login-benefit"><img src={icon} alt="" aria-hidden="true" /><span>{text}</span></div> }

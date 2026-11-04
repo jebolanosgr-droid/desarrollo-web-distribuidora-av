@@ -12,6 +12,10 @@ export const account = pgTable('account', {
 export const verification = pgTable('verification', {
   id: text('id').primaryKey(), identifier: text('identifier').notNull(), value: text('value').notNull(), expiresAt: timestamp('expiresAt').notNull(), createdAt: timestamp('createdAt'), updatedAt: timestamp('updatedAt'),
 })
+export const reservationAvailability = pgTable('reservation_availability', {
+  id: serial('id').primaryKey(), weekStart: date('weekStart').notNull().unique(), totalBoxes: integer('totalBoxes').notNull().default(0), maleBoxes: integer('maleBoxes').notNull().default(0), femaleBoxes: integer('femaleBoxes').notNull().default(0), opensAt: timestamp('opensAt'), closesAt: timestamp('closesAt'), manualClosed: boolean('manualClosed').notNull().default(false), createdAt: timestamp('createdAt').notNull().defaultNow(), updatedAt: timestamp('updatedAt').notNull().defaultNow(),
+})
+
 export const reservations = pgTable('reservations', {
-  id: serial('id').primaryKey(), userId: text('userId').notNull().references(() => user.id, { onDelete: 'cascade' }), customerName: text('customerName').notNull(), phone: text('phone').notNull(), email: text('email').notNull(), deliveryDate: date('deliveryDate').notNull(), quantity: integer('quantity').notNull(), status: text('status').notNull().default('pending'), notes: text('notes'), createdAt: timestamp('createdAt').notNull().defaultNow(), updatedAt: timestamp('updatedAt').notNull().defaultNow(),
+  id: serial('id').primaryKey(), userId: text('userId').notNull().references(() => user.id, { onDelete: 'cascade' }), customerName: text('customerName').notNull(), phone: text('phone').notNull(), email: text('email').notNull(), deliveryDate: date('deliveryDate').notNull(), quantity: integer('quantity').notNull(), gender: text('gender').notNull().default('Machos'), department: text('department'), city: text('city'), address: text('address'), postalCode: text('postalCode'), recipientName: text('recipientName'), recipientPhone: text('recipientPhone'), cancellationRequestedAt: timestamp('cancellationRequestedAt'), status: text('status').notNull().default('pending'), notes: text('notes'), createdAt: timestamp('createdAt').notNull().defaultNow(), updatedAt: timestamp('updatedAt').notNull().defaultNow(),
 }, (table) => [index('reservations_user_id_idx').on(table.userId)])
