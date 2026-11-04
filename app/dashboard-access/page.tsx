@@ -17,7 +17,7 @@ export default function DashboardAccessPage() {
     const response = await fetch('/api/dashboard-access', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ password, confirmation, previewAccess: true }),
+      body: JSON.stringify({ password, confirmation }),
     })
     if (!response.ok) {
       setError('La contraseña del administrador no es válida.')
