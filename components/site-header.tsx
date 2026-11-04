@@ -8,7 +8,7 @@ export function SiteHeader() {
   const [menuOpen, setMenuOpen] = useState(false)
   const pathname = usePathname()
   const isAuthPage = pathname === '/login' || pathname === '/registro'
-  const { data: session } = useSession()
+  const { data: session, isPending: sessionPending } = useSession()
 
   return (
     <header className="site-header">
@@ -24,7 +24,7 @@ export function SiteHeader() {
         {!isAuthPage && <a href="/reserva">Reserva</a>}
         <a href="/#contacto">Contacto</a>
       </nav>
-      {!isAuthPage && <div className="header-actions">{session?.user && <><a className="orders-header-link" href="/mis-pedidos" aria-label="Ver mis pedidos" title="Mis pedidos"><img src="/assets/img/icons/Shopping.png" alt="" aria-hidden="true" /></a><details className="user-menu"><summary aria-label="Abrir menú de usuario"><img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/user-XtRSaIqgjgnF1B0DPxTd5xaH5KQSu2.png" alt="" aria-hidden="true" /></summary><div><strong>{session.user.name}</strong><a href="/mis-pedidos">Mis pedidos</a><button type="button" onClick={async () => { await signOut(); window.location.href = '/' }}>Cerrar sesión</button></div></details></>} {!session?.user && <a className="button button-small" href="/login">Iniciar sesión</a>}</div>}
+      {!isAuthPage && <div className="header-actions">{session?.user && <><a className="orders-header-link" href="/mis-pedidos" aria-label="Ver mis pedidos" title="Mis pedidos"><img src="/assets/img/icons/Shopping.png" alt="" aria-hidden="true" /></a><details className="user-menu"><summary aria-label="Abrir menú de usuario"><img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/user-XtRSaIqgjgnF1B0DPxTd5xaH5KQSu2.png" alt="" aria-hidden="true" /></summary><div><strong>{session.user.name}</strong><a href="/mis-pedidos">Mis pedidos</a><button type="button" onClick={async () => { await signOut(); window.location.href = '/' }}>Cerrar sesión</button></div></details></>} {!sessionPending && !session?.user && <a className="button button-small" href="/login">Iniciar sesión</a>}</div>}
     </header>
   )
 }
