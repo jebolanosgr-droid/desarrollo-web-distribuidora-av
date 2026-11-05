@@ -1,8 +1,9 @@
 'use client'
 
 import useSWR from 'swr'
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { useSession } from '@/lib/auth-client'
 import './reserva.css'
 import { OnboardingPage } from '@/components/onboarding/onboarding-page'
 import { MotionObserver } from '@/components/motion/scroll-reveal'
@@ -52,6 +53,10 @@ export default function ReservaPage() {
   const [postalCode, setPostalCode] = useState('')
   const [error, setError] = useState('')
   const router = useRouter()
+  const { data: session, isPending: sessionPending } = useSession()
+  useEffect(() => {
+    if (!sessionPending && !session?.user) router.replace('/login?returnTo=/reserva')
+  }, [router, session?.user, sessionPending])
   const weeks = availabilityData?.availability ?? []
   const activeWeek = weeks.find((item) => item.weekStart === weekValue) ?? weeks[0]
   const available = activeWeek ? Math.max(0, activeWeek.totalBoxes) : 0
@@ -76,6 +81,8 @@ export default function ReservaPage() {
     if (!response.ok) { setError('No pudimos guardar la reserva. Revisa los datos e inténtalo nuevamente.'); return }
     router.push('/dashboard')
   }
+
+  if (sessionPending || !session?.user) return <main className="reserva-page reserva-auth-loading" aria-live="polite"><p>Verificando tu sesión…</p></main>
 
   return (
     <main className="reserva-page">
