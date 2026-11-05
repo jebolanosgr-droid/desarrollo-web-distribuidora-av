@@ -31,10 +31,11 @@ export function DashboardAdminClient({ reservations: items }: DashboardAdminClie
   const [enabled, setEnabled] = useState(true)
   const [boxes, setBoxes] = useState(100)
   const [week, setWeek] = useState('2026-04-14')
+  const [weekEnd, setWeekEnd] = useState('2026-04-20')
   const [query, setQuery] = useState('')
   const [status, setStatus] = useState('all')
   const [message, setMessage] = useState('')
-  const weekLabel = getWeekRange(week)
+  const weekLabel = week && weekEnd ? `${formatDate(`${week}T12:00:00`)} - ${formatDate(`${weekEnd}T12:00:00`)}` : getWeekRange(week)
 
   const filteredItems = useMemo(() => {
     const normalized = query.trim().toLowerCase()
@@ -45,8 +46,8 @@ export function DashboardAdminClient({ reservations: items }: DashboardAdminClie
   }, [items, query, status])
 
   function enableReservation() {
-    if (!week || boxes < 1 || !Number.isInteger(boxes)) {
-      setMessage('Selecciona una semana e introduce una cantidad de cajas válida.')
+    if (!week || !weekEnd || weekEnd < week || boxes < 1 || !Number.isInteger(boxes)) {
+      setMessage('Introduce una fecha de inicio, una fecha de finalización válida y una cantidad de cajas válida.')
       return
     }
     setEnabled(true)
@@ -74,7 +75,7 @@ export function DashboardAdminClient({ reservations: items }: DashboardAdminClie
         <div className="admin-dashboard-fields">
           <h2 id="enable-title">Habilitar reserva</h2>
           <div className="admin-dashboard-grid">
-            <label htmlFor="admin-week"><span className="admin-field-heading"><span aria-hidden="true">▣</span> Disponibilidad de cajas</span><b>Semana:</b><input id="admin-week" type="date" value={week} onChange={(event) => setWeek(event.target.value)} /></label>
+            <label htmlFor="admin-week"><span className="admin-field-heading"><span aria-hidden="true">▣</span> Disponibilidad de cajas</span><b>Fecha de inicio:</b><input id="admin-week" type="date" value={week} onChange={(event) => setWeek(event.target.value)} /></label><label htmlFor="admin-week-end"><span className="admin-field-heading"><span aria-hidden="true">▣</span> Finalización de disponibilidad</span><b>Fecha de finalización:</b><input id="admin-week-end" type="date" value={weekEnd} min={week} onChange={(event) => setWeekEnd(event.target.value)} /></label>
             <label htmlFor="admin-boxes"><span className="admin-field-heading"><span aria-hidden="true">◇</span> Número de cajas a habilitar</span><b>Total de cajas:</b><input id="admin-boxes" type="number" min="1" step="1" value={boxes} onChange={(event) => setBoxes(Number(event.target.value))} /></label>
           </div>
           <div className="admin-dashboard-actions"><button type="button" className="admin-primary" onClick={enableReservation}>Habilitar <span aria-hidden="true">→</span></button><button type="button" className="admin-danger" onClick={closeReservation}>{enabled ? 'Cerrar Reserva' : 'Reserva Cerrada'} <span aria-hidden="true">→</span></button></div>
