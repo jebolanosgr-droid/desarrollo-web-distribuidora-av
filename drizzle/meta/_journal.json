@@ -15,6 +15,13 @@
       "when": 1793827201858,
       "tag": "0001_little_harpoon",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1794945606632,
+      "tag": "0002_familiar_komodo",
+      "breakpoints": true
     }
   ]
 }
