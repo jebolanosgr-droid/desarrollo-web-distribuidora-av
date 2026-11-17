@@ -1,12 +1,12 @@
 'use client'
 
-import { FormEvent, useState } from 'react'
+import { useState } from 'react'
+import type { FormEvent } from 'react'
 import { useRouter } from 'next/navigation'
 
 export default function DashboardAccessPage() {
   const router = useRouter()
   const [password, setPassword] = useState('')
-  const [confirmation, setConfirmation] = useState('')
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
 
@@ -14,18 +14,24 @@ export default function DashboardAccessPage() {
     event.preventDefault()
     setError('')
     setLoading(true)
-    const response = await fetch('/api/dashboard-access', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ password, confirmation }),
-    })
-    if (!response.ok) {
-      setError('La contraseña del administrador no es válida.')
+    try {
+      const response = await fetch('/api/dashboard-access', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password }),
+      })
+      const result = await response.json().catch(() => null)
+      if (!response.ok) {
+        setError(result?.error ?? 'No se pudo validar el acceso administrativo.')
+        return
+      }
+      router.push('/dashboard')
+      router.refresh()
+    } catch {
+      setError('No se pudo conectar con el servicio de acceso. Inténtalo de nuevo.')
+    } finally {
       setLoading(false)
-      return
     }
-    router.push('/dashboard')
-    router.refresh()
   }
 
   return (
@@ -40,13 +46,11 @@ export default function DashboardAccessPage() {
         <form className="dashboard-access-form" onSubmit={handleSubmit}>
           <p className="dashboard-access-eyebrow">Acceso administrativo</p>
           <h2 id="dashboard-access-title">Iniciar sesión</h2>
-          <p>Introduce la contraseña dos veces para entrar al panel.</p>
+          <p>Introduce la contraseña de acceso administrativo.</p>
           <label htmlFor="dashboard-password">Contraseña</label>
-          <input id="dashboard-password" type="password" value={password} onChange={(event) => setPassword(event.target.value)} autoComplete="new-password" />
-          <label htmlFor="dashboard-confirmation">Confirmar contraseña</label>
-          <input id="dashboard-confirmation" type="password" value={confirmation} onChange={(event) => setConfirmation(event.target.value)} autoComplete="new-password" />
+          <input id="dashboard-password" type="password" value={password} onChange={(event) => setPassword(event.target.value)} autoComplete="current-password" required minLength={16} maxLength={512} />
           {error && <p className="dashboard-access-error" role="alert">{error}</p>}
-          <button type="submit" disabled={loading}>{loading ? 'Comprobando...' : 'Entrar al dashboard →'}</button>
+          <button type="submit" disabled={loading}>{loading ? 'Comprobando…' : 'Entrar al dashboard →'}</button>
         </form>
       </section>
     </main>

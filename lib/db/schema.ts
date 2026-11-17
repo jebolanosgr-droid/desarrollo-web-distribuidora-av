@@ -1,4 +1,5 @@
-import { boolean, date, index, integer, pgTable, serial, text, timestamp } from 'drizzle-orm/pg-core'
+import { sql } from 'drizzle-orm'
+import { boolean, check, date, index, integer, pgTable, serial, text, timestamp } from 'drizzle-orm/pg-core'
 
 export const user = pgTable('user', {
   id: text('id').primaryKey(), name: text('name').notNull(), email: text('email').notNull().unique(), emailVerified: boolean('emailVerified').notNull().default(false), image: text('image'), createdAt: timestamp('createdAt').notNull().defaultNow(), updatedAt: timestamp('updatedAt').notNull().defaultNow(),
@@ -13,8 +14,23 @@ export const verification = pgTable('verification', {
   id: text('id').primaryKey(), identifier: text('identifier').notNull(), value: text('value').notNull(), expiresAt: timestamp('expiresAt').notNull(), createdAt: timestamp('createdAt'), updatedAt: timestamp('updatedAt'),
 })
 export const reservationAvailability = pgTable('reservation_availability', {
-  id: serial('id').primaryKey(), weekStart: date('weekStart').notNull().unique(), totalBoxes: integer('totalBoxes').notNull().default(0), maleBoxes: integer('maleBoxes').notNull().default(0), femaleBoxes: integer('femaleBoxes').notNull().default(0), opensAt: timestamp('opensAt'), closesAt: timestamp('closesAt'), manualClosed: boolean('manualClosed').notNull().default(false), createdAt: timestamp('createdAt').notNull().defaultNow(), updatedAt: timestamp('updatedAt').notNull().defaultNow(),
-})
+  id: serial('id').primaryKey(),
+  weekStart: date('weekStart').notNull().unique(),
+  totalBoxes: integer('totalBoxes').notNull().default(0),
+  maleBoxes: integer('maleBoxes').notNull().default(0),
+  femaleBoxes: integer('femaleBoxes').notNull().default(0),
+  opensAt: timestamp('opensAt'),
+  closesAt: timestamp('closesAt'),
+  manualClosed: boolean('manualClosed').notNull().default(false),
+  createdAt: timestamp('createdAt').notNull().defaultNow(),
+  updatedAt: timestamp('updatedAt').notNull().defaultNow(),
+}, (table) => [
+  check('reservation_availability_week_start_monday', sql`EXTRACT(ISODOW FROM ${table.weekStart}) = 1`),
+  check('reservation_availability_total_boxes_nonnegative', sql`${table.totalBoxes} >= 0`),
+  check('reservation_availability_male_boxes_range', sql`${table.maleBoxes} >= 0 AND ${table.maleBoxes} <= ${table.totalBoxes}`),
+  check('reservation_availability_female_boxes_range', sql`${table.femaleBoxes} >= 0 AND ${table.femaleBoxes} <= ${table.totalBoxes}`),
+  check('reservation_availability_time_window', sql`${table.opensAt} IS NULL OR ${table.closesAt} IS NULL OR ${table.closesAt} > ${table.opensAt}`),
+])
 
 export const reservations = pgTable('reservations', {
   id: serial('id').primaryKey(), userId: text('userId').notNull().references(() => user.id, { onDelete: 'cascade' }), customerName: text('customerName').notNull(), phone: text('phone').notNull(), email: text('email').notNull(), deliveryDate: date('deliveryDate').notNull(), quantity: integer('quantity').notNull(), gender: text('gender').notNull().default('Machos'), department: text('department'), city: text('city'), address: text('address'), postalCode: text('postalCode'), recipientName: text('recipientName'), recipientPhone: text('recipientPhone'), cancellationRequestedAt: timestamp('cancellationRequestedAt'), status: text('status').notNull().default('pending'), notes: text('notes'), createdAt: timestamp('createdAt').notNull().defaultNow(), updatedAt: timestamp('updatedAt').notNull().defaultNow(),

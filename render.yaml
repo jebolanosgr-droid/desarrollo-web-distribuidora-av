@@ -3,7 +3,7 @@ services:
     name: avinova
     runtime: node
     buildCommand: corepack enable && pnpm install --frozen-lockfile && pnpm build
-    startCommand: pnpm start
+    startCommand: pnpm db:migrate && pnpm start
     envVars:
       - key: NODE_ENV
         value: production
@@ -11,3 +11,13 @@ services:
         sync: false
       - key: BETTER_AUTH_SECRET
         sync: false
+      - key: DASHBOARD_PASSWORD
+        sync: false
+      - key: ADMIN_EMAIL
+        value: jebolanosgr@ut.edu.co
+      - key: RESEND_API_KEY
+        sync: false
+      - key: RESEND_FROM_EMAIL
+        sync: false
+      - key: WHATSAPP_CONTACT_URL
+        value: https://wa.me/REEMPLAZAR_NUMERO_DE_WHATSAPP

@@ -21,13 +21,36 @@ type ReservationPdfData = {
   createdAt: string | Date
 }
 
+function asDate(value: string | Date) {
+  if (value instanceof Date) return value
+  return /^\d{4}-\d{2}-\d{2}$/.test(value) ? new Date(`${value}T12:00:00-05:00`) : new Date(value)
+}
+
 function formatValue(value: string | Date | number | null | undefined) {
   if (value === null || value === undefined || value === '') return 'No informado'
   if (value instanceof Date || (typeof value === 'string' && /^\d{4}-\d{2}-\d{2}/.test(value))) {
-    const date = new Date(value)
-    if (!Number.isNaN(date.getTime())) return new Intl.DateTimeFormat('es-CO', { dateStyle: 'medium', ...(value instanceof Date || value.includes('T') ? { timeStyle: 'short' as const } : {}) }).format(date)
+    const date = asDate(value)
+    if (!Number.isNaN(date.getTime())) {
+      return new Intl.DateTimeFormat('es-CO', {
+        dateStyle: 'medium',
+        ...(value instanceof Date || (typeof value === 'string' && value.includes('T')) ? { timeStyle: 'short' as const } : {}),
+        timeZone: 'America/Bogota',
+      }).format(date)
+    }
   }
   return String(value)
+}
+
+function formatWeek(value: string | Date) {
+  const date = asDate(value)
+  if (Number.isNaN(date.getTime())) return 'No disponible'
+  const start = new Date(date)
+  const weekday = start.getDay() || 7
+  start.setDate(start.getDate() - weekday + 1)
+  const end = new Date(start)
+  end.setDate(start.getDate() + 6)
+  const formatter = new Intl.DateTimeFormat('es-CO', { day: 'numeric', month: 'long', timeZone: 'America/Bogota' })
+  return `${formatter.format(start)} al ${formatter.format(end)} de ${end.getFullYear()}`
 }
 
 export function ReservationPdfButton({ reservation }: { reservation: ReservationPdfData }) {
@@ -55,6 +78,7 @@ export function ReservationPdfButton({ reservation }: { reservation: Reservation
       ['Teléfono', reservation.phone],
       ['Cantidad de cajas', reservation.quantity],
       ['Género', reservation.gender],
+      ['Semana de entrega', formatWeek(reservation.deliveryDate)],
       ['Fecha de entrega', reservation.deliveryDate],
       ['Departamento', reservation.department],
       ['Ciudad', reservation.city],
