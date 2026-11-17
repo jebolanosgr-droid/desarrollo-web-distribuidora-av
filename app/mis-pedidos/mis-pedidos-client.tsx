@@ -9,7 +9,7 @@ type Reservation = { id: number; customerName: string; email: string; phone: str
 const states = [{ key: 'pending', label: 'Pendientes' }, { key: 'confirmed', label: 'Confirmados' }, { key: 'delivered', label: 'Entregados' }, { key: 'cancelled', label: 'Cancelados' }]
 const statusLabel: Record<string, string> = { pending: 'Pendiente', confirmed: 'Confirmado', delivered: 'Entregado', cancelled: 'Cancelado' }
 
-function formatDate(value: string) { const date = new Date(value); return Number.isNaN(date.getTime()) ? 'Fecha no disponible' : new Intl.DateTimeFormat('es-CO', { dateStyle: 'medium', timeStyle: 'short' }).format(date) }
+function formatDate(value: string) { const date = new Date(/^\d{4}-\d{2}-\d{2}$/.test(value) ? `${value}T12:00:00` : value); return Number.isNaN(date.getTime()) ? 'Fecha no disponible' : new Intl.DateTimeFormat('es-CO', { dateStyle: 'medium', ...(value.includes('T') ? { timeStyle: 'short' as const } : {}) }).format(date) }
 function field(label: string, value: string | number | null | undefined) { return value ? <p><b>{label}:</b> {value}</p> : null }
 
 export default function MisPedidosPage() {
