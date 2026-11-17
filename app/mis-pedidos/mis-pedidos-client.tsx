@@ -6,8 +6,8 @@ import { ReservationPdfButton } from '@/components/reservation-pdf-button'
 import './mis-pedidos.css'
 
 type Reservation = { id: number; customerName: string; email: string; phone: string; deliveryDate: string; quantity: number; gender: string; department: string | null; city: string | null; address: string | null; postalCode: string | null; recipientName: string | null; recipientPhone: string | null; notes: string | null; status: string; createdAt: string; cancellationRequestedAt: string | null }
-const states = [{ key: 'pending', label: 'Pendientes' }, { key: 'confirmed', label: 'Confirmados' }, { key: 'delivered', label: 'Entregados' }, { key: 'cancelled', label: 'Cancelados' }]
-const statusLabel: Record<string, string> = { pending: 'Pendiente', confirmed: 'Confirmado', delivered: 'Entregado', cancelled: 'Cancelado' }
+const states = [{ key: 'pending', label: 'Pendientes' }, { key: 'confirmed', label: 'Confirmadas' }, { key: 'delivered', label: 'Entregadas' }, { key: 'cancelled', label: 'Canceladas' }]
+const statusLabel: Record<string, string> = { pending: 'Pendiente', confirmed: 'Confirmada', delivered: 'Entregada', cancelled: 'Cancelada' }
 
 function formatDate(value: string) { const date = new Date(/^\d{4}-\d{2}-\d{2}$/.test(value) ? `${value}T12:00:00` : value); return Number.isNaN(date.getTime()) ? 'Fecha no disponible' : new Intl.DateTimeFormat('es-CO', { dateStyle: 'medium', ...(value.includes('T') ? { timeStyle: 'short' as const } : {}) }).format(date) }
 function field(label: string, value: string | number | null | undefined) { return value ? <p><b>{label}:</b> {value}</p> : null }
