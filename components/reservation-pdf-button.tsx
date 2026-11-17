@@ -17,14 +17,26 @@ type ReservationPdfData = {
   recipientName?: string | null
   recipientPhone?: string | null
   notes?: string | null
+  cancellationRequestedAt?: string | Date | null
   status: string
   createdAt: string | Date
+}
+
+function formatWeek(value: string | Date) {
+  const date = new Date(typeof value === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(value) ? `${value}T12:00:00` : value)
+  if (Number.isNaN(date.getTime())) return 'No informado'
+  const start = new Date(date)
+  const day = start.getDay() || 7
+  start.setDate(start.getDate() - day + 1)
+  const end = new Date(start)
+  end.setDate(end.getDate() + 6)
+  return new Intl.DateTimeFormat('es-CO', { day: 'numeric', month: 'long', year: 'numeric' }).formatRange(start, end)
 }
 
 function formatValue(value: string | Date | number | null | undefined) {
   if (value === null || value === undefined || value === '') return 'No informado'
   if (value instanceof Date || (typeof value === 'string' && /^\d{4}-\d{2}-\d{2}/.test(value))) {
-    const date = new Date(value)
+    const date = new Date(typeof value === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(value) ? `${value}T12:00:00` : value)
     if (!Number.isNaN(date.getTime())) return new Intl.DateTimeFormat('es-CO', { dateStyle: 'medium', ...(value instanceof Date || value.includes('T') ? { timeStyle: 'short' as const } : {}) }).format(date)
   }
   return String(value)
@@ -56,12 +68,14 @@ export function ReservationPdfButton({ reservation }: { reservation: Reservation
       ['Cantidad de cajas', reservation.quantity],
       ['Género', reservation.gender],
       ['Fecha de entrega', reservation.deliveryDate],
+      ['Semana de reserva', formatWeek(reservation.deliveryDate)],
       ['Departamento', reservation.department],
       ['Ciudad', reservation.city],
       ['Dirección', reservation.address],
       ['Código postal', reservation.postalCode],
       ['Nombre de quien recibe', reservation.recipientName],
       ['Teléfono de quien recibe', reservation.recipientPhone],
+      ['Solicitud de cancelación', reservation.cancellationRequestedAt ? `Solicitada el ${formatValue(reservation.cancellationRequestedAt)}` : 'No solicitada'],
       ['Comentarios adicionales', reservation.notes || 'Ninguno'],
     ]
 
