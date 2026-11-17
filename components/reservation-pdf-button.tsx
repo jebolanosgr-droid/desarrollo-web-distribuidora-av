@@ -43,7 +43,7 @@ function formatValue(value: string | Date | number | null | undefined) {
 }
 
 export function ReservationPdfButton({ reservation }: { reservation: ReservationPdfData }) {
-  function downloadPdf() {
+  async function downloadPdf() {
     const pdf = new jsPDF({ unit: 'mm', format: 'a4' })
     const pageHeight = pdf.internal.pageSize.getHeight()
     const margin = 18
@@ -52,11 +52,29 @@ export function ReservationPdfButton({ reservation }: { reservation: Reservation
     pdf.setFillColor(253, 195, 3)
     pdf.rect(0, 0, 210, 34, 'F')
     pdf.setTextColor(40, 40, 40)
+    try {
+      const logo = new Image()
+      logo.crossOrigin = 'anonymous'
+      logo.src = '/assets/img/logo/logo-avinova.png'
+      await new Promise<void>((resolve, reject) => { logo.onload = () => resolve(); logo.onerror = () => reject(new Error('No se pudo cargar el logo')) })
+      const canvas = document.createElement('canvas')
+      canvas.width = logo.naturalWidth
+      canvas.height = logo.naturalHeight
+      const context = canvas.getContext('2d')
+      if (context) {
+        context.drawImage(logo, 0, 0)
+        pdf.addImage(canvas.toDataURL('image/png'), 'PNG', margin, 7, 27, 20)
+      }
+    } catch {
+      pdf.setFont('helvetica', 'bold')
+      pdf.setFontSize(14)
+      pdf.text('AVINOVA', margin, 15)
+    }
     pdf.setFont('helvetica', 'bold')
     pdf.setFontSize(18)
-    pdf.text('AVINOVA | DETALLE DEL PEDIDO', margin, 17)
+    pdf.text('COMPROBANTE DE RESERVA', 52, 17)
     pdf.setFontSize(10)
-    pdf.text(`Pedido AV-${String(reservation.id).padStart(5, '0')}`, margin, 26)
+    pdf.text(`Pedido AV-${String(reservation.id).padStart(5, '0')}`, 52, 26)
     y = 46
 
     const fields: [string, string | Date | number | null | undefined][] = [
@@ -79,7 +97,17 @@ export function ReservationPdfButton({ reservation }: { reservation: Reservation
       ['Comentarios adicionales', reservation.notes || 'Ninguno'],
     ]
 
-    for (const [label, rawValue] of fields) {
+    for (const [index, [label, rawValue]] of fields.entries()) {
+      const sectionTitle = index === 0 ? 'DETALLES DE LA RESERVA' : index === 2 ? 'DATOS DEL CLIENTE' : index === 7 ? 'INFORMACIÓN DE ENTREGA' : index === 16 ? 'OBSERVACIONES' : null
+      if (sectionTitle) {
+        if (y + 12 > pageHeight - margin) { pdf.addPage(); y = margin }
+        pdf.setFont('helvetica', 'bold')
+        pdf.setFontSize(9)
+        pdf.setTextColor(126, 92, 0)
+        pdf.text(sectionTitle, margin, y)
+        pdf.setTextColor(40, 40, 40)
+        y += 8
+      }
       const valueLines = pdf.splitTextToSize(formatValue(rawValue), 126) as string[]
       const blockHeight = Math.max(8, valueLines.length * 5 + 3)
       if (y + blockHeight > pageHeight - margin) {

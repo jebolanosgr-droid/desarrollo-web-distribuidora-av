@@ -29,7 +29,11 @@ function getWeekRange(value: string) {
   return `${formatter.format(start)} - ${formatter.format(end)} de ${end.getFullYear()}`
 }
 
-export function DashboardAdminClient({ reservations: items }: DashboardAdminClientProps) {
+export function DashboardAdminClient({ reservations: initialItems }: DashboardAdminClientProps) {
+  const [items, setItems] = useState(initialItems)
+  const [savingStatusId, setSavingStatusId] = useState<number | null>(null)
+  const [statusFeedback, setStatusFeedback] = useState('')
+  const [statusDrafts, setStatusDrafts] = useState<Record<number, string>>({})
   const fetchAvailability = (url: string) => fetch(url, { cache: 'no-store' }).then(async (response) => {
     if (!response.ok) throw new Error('No se pudo cargar la disponibilidad')
     return response.json() as Promise<{ availability: Array<{ id: number; weekStart: string; totalBoxes: number; maleBoxes: number; femaleBoxes: number; manualClosed: boolean; reservedBoxes: number }> }>
@@ -60,6 +64,24 @@ export function DashboardAdminClient({ reservations: items }: DashboardAdminClie
       return matchesQuery && (status === 'all' || item.status === status)
     })
   }, [items, query, status])
+
+  async function saveReservationStatus(id: number, nextStatus: string) {
+    if (!['pending', 'confirmed', 'cancelled'].includes(nextStatus)) return
+    setSavingStatusId(id)
+    setStatusFeedback('')
+    try {
+      const response = await fetch('/api/dashboard/reservations', { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ id, status: nextStatus }) })
+      const result = await response.json().catch(() => null)
+      if (!response.ok) throw new Error(result?.error ?? 'No se pudo actualizar el estado.')
+      setItems((current) => current.map((item) => item.id === id ? result.reservation : item))
+      setStatusDrafts((current) => { const next = { ...current }; delete next[id]; return next })
+      setStatusFeedback(`Reserva AV-${String(id).padStart(5, '0')}: estado actualizado a ${nextStatus === 'pending' ? 'Pendiente' : nextStatus === 'confirmed' ? 'Confirmada' : 'Cancelada'}.`)
+    } catch (reason) {
+      setStatusFeedback(reason instanceof Error ? reason.message : 'No se pudo actualizar el estado.')
+    } finally {
+      setSavingStatusId(null)
+    }
+  }
 
   async function saveAvailability(manualClosed: boolean) {
     if (!selectedWeek || !/^\d{4}-\d{2}-\d{2}$/.test(selectedWeek) || !Number.isInteger(totalBoxes) || totalBoxes < 0 || !Number.isInteger(maleCapacity) || !Number.isInteger(femaleCapacity) || maleCapacity < 0 || femaleCapacity < 0 || totalBoxes < maleCapacity + femaleCapacity) {
@@ -115,7 +137,8 @@ export function DashboardAdminClient({ reservations: items }: DashboardAdminClie
       <section className="admin-reservations" aria-labelledby="reservations-title">
         <h2 id="reservations-title">Reservas realizadas por:</h2>
         <div className="admin-reservation-filters"><label htmlFor="reservation-search">Buscar<input id="reservation-search" type="search" placeholder="Nombre, correo o teléfono" value={query} onChange={(event) => setQuery(event.target.value)} /></label><label htmlFor="reservation-status">Estado<select id="reservation-status" value={status} onChange={(event) => setStatus(event.target.value)}><option value="all">Todos</option><option value="pending">Pendiente</option><option value="confirmed">Confirmada</option><option value="cancelled">Cancelada</option></select></label></div>
-        {filteredItems.length === 0 ? <div className="admin-empty">No hay reservas que coincidan con los filtros.</div> : filteredItems.map((item) => <article className="admin-reservation-card" key={item.id}><div className="admin-card-heading"><h3>Tipo de usuario: Cliente</h3><span className="admin-reservation-status">{item.status}</span></div><div className="admin-reservation-details"><div><p><b>Nombre:</b> {item.customerName}</p><p><b>Correo:</b> {item.email}</p><p><b>Teléfono:</b> {item.phone}</p></div><div><p><b>Cantidad de cajas:</b> {item.quantity}</p><p><b>Semana:</b> {getWeekRange(item.deliveryDate)}</p><p><b>Estado:</b> {item.status}</p></div><div><p><b>Entrega:</b> {formatDate(item.deliveryDate)}</p><p><b>Reserva creada:</b> {formatDate(item.createdAt)}</p><p><b>Género:</b> {item.gender}</p><p><b>Departamento:</b> {item.department || 'No informado'}</p><p><b>Ciudad:</b> {item.city || 'No informada'}</p><p><b>Dirección:</b> {item.address || 'No informada'}</p><p><b>Código postal:</b> {item.postalCode || 'No informado'}</p><p><b>Recibe:</b> {item.recipientName || 'No informado'}{item.recipientPhone ? ` · ${item.recipientPhone}` : ''}</p><p><b>Cancelación solicitada:</b> {item.cancellationRequestedAt ? formatDate(item.cancellationRequestedAt) : 'No'}</p></div></div><p className="admin-comments"><b>Comentarios adicionales:</b> {item.notes || 'Ninguno'}</p><div className="admin-reservation-actions"><ReservationPdfButton reservation={{ ...item, status: item.status === 'pending' ? 'Pendiente' : item.status === 'confirmed' ? 'Confirmada' : item.status === 'delivered' ? 'Entregada' : item.status === 'cancelled' ? 'Cancelada' : item.status }} /></div></article>)}
+        {statusFeedback && <p className="admin-feedback" role="status">{statusFeedback}</p>}
+        {filteredItems.length === 0 ? <div className="admin-empty">No hay reservas que coincidan con los filtros.</div> : filteredItems.map((item) => <article className="admin-reservation-card" key={item.id}><div className="admin-card-heading"><h3>Tipo de usuario: Cliente</h3><span className={`admin-reservation-status status-${item.status}`}>{item.status === 'pending' ? 'Pendiente' : item.status === 'confirmed' ? 'Confirmada' : item.status === 'cancelled' ? 'Cancelada' : item.status}</span></div><div className="admin-reservation-details"><div><p><b>Nombre:</b> {item.customerName}</p><p><b>Correo:</b> {item.email}</p><p><b>Teléfono:</b> {item.phone}</p></div><div><p><b>Cantidad de cajas:</b> {item.quantity}</p><p><b>Semana:</b> {getWeekRange(item.deliveryDate)}</p><p><b>Estado:</b> {item.status}</p></div><div><p><b>Entrega:</b> {formatDate(item.deliveryDate)}</p><p><b>Reserva creada:</b> {formatDate(item.createdAt)}</p><p><b>Género:</b> {item.gender}</p><p><b>Departamento:</b> {item.department || 'No informado'}</p><p><b>Ciudad:</b> {item.city || 'No informada'}</p><p><b>Dirección:</b> {item.address || 'No informada'}</p><p><b>Código postal:</b> {item.postalCode || 'No informado'}</p><p><b>Recibe:</b> {item.recipientName || 'No informado'}{item.recipientPhone ? ` · ${item.recipientPhone}` : ''}</p><p><b>Cancelación solicitada:</b> {item.cancellationRequestedAt ? formatDate(item.cancellationRequestedAt) : 'No'}</p></div></div><p className="admin-comments"><b>Comentarios adicionales:</b> {item.notes || 'Ninguno'}</p><div className="admin-reservation-actions"><label className="admin-status-control">Cambiar estado<select aria-label={`Nuevo estado para reserva AV-${String(item.id).padStart(5, '0')}`} value={statusDrafts[item.id] ?? item.status} disabled={savingStatusId === item.id} onChange={(event) => setStatusDrafts((current) => ({ ...current, [item.id]: event.target.value }))}><option value="pending">Pendiente</option><option value="confirmed">Confirmada</option><option value="cancelled">Cancelada</option></select></label><button type="button" className="admin-primary admin-status-save" disabled={savingStatusId === item.id || (statusDrafts[item.id] ?? item.status) === item.status} onClick={() => void saveReservationStatus(item.id, statusDrafts[item.id] ?? item.status)}>{savingStatusId === item.id ? 'Guardando…' : 'Guardar estado'}</button><ReservationPdfButton reservation={{ ...item, status: item.status === 'pending' ? 'Pendiente' : item.status === 'confirmed' ? 'Confirmada' : item.status === 'delivered' ? 'Entregada' : item.status === 'cancelled' ? 'Cancelada' : item.status }} /></div></article>)}
       </section>
     </main>
   )
