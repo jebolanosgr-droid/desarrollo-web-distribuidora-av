@@ -3,6 +3,7 @@
 import { useMemo, useState } from 'react'
 import type { reservations } from '@/lib/db/schema'
 import { OnboardingPage } from '@/components/onboarding/onboarding-page'
+import { ReservationPdfButton } from '@/components/reservation-pdf-button'
 
 type Reservation = typeof reservations.$inferSelect
 
@@ -87,7 +88,7 @@ export function DashboardAdminClient({ reservations: items }: DashboardAdminClie
       <section className="admin-reservations" aria-labelledby="reservations-title">
         <h2 id="reservations-title">Reservas realizadas por:</h2>
         <div className="admin-reservation-filters"><label htmlFor="reservation-search">Buscar<input id="reservation-search" type="search" placeholder="Nombre, correo o teléfono" value={query} onChange={(event) => setQuery(event.target.value)} /></label><label htmlFor="reservation-status">Estado<select id="reservation-status" value={status} onChange={(event) => setStatus(event.target.value)}><option value="all">Todos</option><option value="pending">Pendiente</option><option value="confirmed">Confirmada</option><option value="cancelled">Cancelada</option></select></label></div>
-        {filteredItems.length === 0 ? <div className="admin-empty">No hay reservas que coincidan con los filtros.</div> : filteredItems.map((item) => <article className="admin-reservation-card" key={item.id}><div className="admin-card-heading"><h3>Tipo de usuario: Cliente</h3><span className="admin-reservation-status">{item.status}</span></div><div className="admin-reservation-details"><div><p><b>Nombre:</b> {item.customerName}</p><p><b>Correo:</b> {item.email}</p><p><b>Teléfono:</b> {item.phone}</p></div><div><p><b>Cantidad de cajas:</b> {item.quantity}</p><p><b>Semana:</b> {formatDate(item.deliveryDate)}</p><p><b>Estado:</b> {item.status}</p></div><div><p><b>Entrega:</b> {formatDate(item.deliveryDate)}</p><p><b>Reserva creada:</b> {formatDate(item.createdAt)}</p><p><b>Detalles:</b> Información registrada</p></div></div><p className="admin-comments"><b>Comentarios adicionales:</b> {item.notes || 'Ninguno'}</p></article>)}
+        {filteredItems.length === 0 ? <div className="admin-empty">No hay reservas que coincidan con los filtros.</div> : filteredItems.map((item) => <article className="admin-reservation-card" key={item.id}><div className="admin-card-heading"><h3>Tipo de usuario: Cliente</h3><span className="admin-reservation-status">{item.status}</span></div><div className="admin-reservation-details"><div><p><b>Nombre:</b> {item.customerName}</p><p><b>Correo:</b> {item.email}</p><p><b>Teléfono:</b> {item.phone}</p></div><div><p><b>Cantidad de cajas:</b> {item.quantity}</p><p><b>Semana:</b> {formatDate(item.deliveryDate)}</p><p><b>Estado:</b> {item.status}</p></div><div><p><b>Entrega:</b> {formatDate(item.deliveryDate)}</p><p><b>Reserva creada:</b> {formatDate(item.createdAt)}</p><p><b>Detalles:</b> Información registrada</p></div></div><p className="admin-comments"><b>Comentarios adicionales:</b> {item.notes || 'Ninguno'}</p><div className="admin-reservation-actions"><ReservationPdfButton reservation={{ ...item, status: item.status === 'pending' ? 'Pendiente' : item.status === 'confirmed' ? 'Confirmada' : item.status === 'delivered' ? 'Entregada' : item.status === 'cancelled' ? 'Cancelada' : item.status }} /></div></article>)}
       </section>
     </main>
   )
