@@ -4,6 +4,7 @@ import { headers } from 'next/headers'
 import { auth } from '@/lib/auth'
 import { db } from '@/lib/db'
 import { reservationAvailability, reservations } from '@/lib/db/schema'
+import { sendReservationEmail } from '@/lib/reservation-email'
 
 function validDate(value: unknown): value is string {
   if (typeof value !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(value)) return false
@@ -74,6 +75,12 @@ export async function POST(request: Request) {
       }).returning()
       return created
     })
+    try {
+      const emailResult = await sendReservationEmail(reservation, process.env.APP_BASE_URL ?? new URL(request.url).origin, session.user.email)
+      if (!emailResult.sent) console.info('[avinova] Reservation email skipped: email provider is not configured.')
+    } catch (error) {
+      console.error('[avinova] Reservation email failed; reservation remains saved.', error instanceof Error ? error.message : 'Unknown provider error')
+    }
     return NextResponse.json({ reservation }, { status: 201 })
   } catch (error) {
     const reason = error instanceof Error ? error.message : ''
